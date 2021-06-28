@@ -16,7 +16,7 @@ public class ContractController {
     private final ContractService contractService;
 
     @GetMapping("/{id}")
-    public Contract get(@PathVariable String id) throws RepositoryException {
+    public Contract getOne(@PathVariable String id) throws RepositoryException {
         return contractService.get(id);
     }
 }
