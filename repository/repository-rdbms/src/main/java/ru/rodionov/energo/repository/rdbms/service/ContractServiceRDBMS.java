@@ -16,7 +16,7 @@ public class ContractServiceRDBMS implements ContractService {
     private final Converter<Contract, ContractDB> converter;
 
     @Override
-    public Contract get(String id) throws RepositoryException {
+    public Contract get(String id) {
         ContractDB contractDB = contractRepo.findById(id)
                 .orElseThrow(() -> new RepositoryException("Не найден контракт с id = '" + id + "'"));
         return converter.fromDB(contractDB);
