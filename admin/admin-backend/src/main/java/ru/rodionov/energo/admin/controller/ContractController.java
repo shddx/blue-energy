@@ -1,12 +1,11 @@
 package ru.rodionov.energo.admin.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.api.service.ContractService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/contract")
@@ -14,8 +13,18 @@ import ru.rodionov.energo.repository.api.service.ContractService;
 public class ContractController {
     private final ContractService contractService;
 
+    @GetMapping
+    public List<Contract> getAll() {
+        return contractService.getAll();
+    }
+
     @GetMapping("/{id}")
     public Contract get(@PathVariable String id) {
         return contractService.get(id);
+    }
+
+    @PostMapping
+    public void create(@RequestBody Contract contract) {
+        contractService.save(contract, false);
     }
 }
