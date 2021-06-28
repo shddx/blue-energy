@@ -1,4 +1,4 @@
-package ru.roidonov.energo.repository.api.exception;
+package ru.rodionov.energo.repository.api.exception;
 
 public class RepositoryException extends Exception {
     public RepositoryException(String message) {

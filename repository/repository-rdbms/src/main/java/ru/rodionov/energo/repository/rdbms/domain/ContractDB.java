@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.roidonov.energo.repository.api.model.ContractType;
+import ru.rodionov.energo.repository.api.model.ContractType;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

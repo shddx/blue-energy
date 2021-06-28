@@ -1,7 +1,7 @@
 package ru.rodionov.energo.repository.rdbms.converter;
 
 import ru.rodionov.energo.repository.rdbms.domain.ContractDB;
-import ru.roidonov.energo.repository.api.model.Contract;
+import ru.rodionov.energo.repository.api.model.Contract;
 
 public class ContractConverterRDBMS implements Converter<Contract, ContractDB> {
     @Override
