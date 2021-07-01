@@ -19,6 +19,7 @@ public class ContractDB {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
+    @Column(unique = true)
     private String number;
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
