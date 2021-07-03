@@ -3,14 +3,14 @@
     <ul class="c-sidebar-nav">
       <li class="c-sidebar-nav-title">Nav Title</li>
       <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="#">
-          <i class="c-sidebar-nav-icon cil-description"></i> Контракты
-        </a>
+        <router-link class="c-sidebar-nav-link" to="/contracts">
+          <i class="c-sidebar-nav-icon cil-description"></i> Договора
+        </router-link>
       </li>
       <li class="c-sidebar-nav-item">
-        <a class="c-sidebar-nav-link" href="#">
-          <i class="c-sidebar-nav-icon cil-description"></i> Дома
-        </a>
+        <router-link class="c-sidebar-nav-link" to="/houses">
+          <i class="c-sidebar-nav-icon cil-house"></i> Дома
+        </router-link>
       </li>
       <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
