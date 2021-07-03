@@ -1,6 +1,9 @@
 package ru.rodionov.energo.repository.rdbms.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import ru.rodionov.energo.repository.api.model.ContractType;
 
@@ -22,11 +25,13 @@ public class ContractDB {
     @Column(unique = true)
     private String number;
     @Enumerated(EnumType.STRING)
-    @Column(name = "type")
     private ContractType type;
+    private String client;
     private Integer price;
     @Column(columnDefinition = "DATE")
     private LocalDate signDate;
+    @Column(columnDefinition = "DATE")
+    private LocalDate endDate;
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime updated;
 }

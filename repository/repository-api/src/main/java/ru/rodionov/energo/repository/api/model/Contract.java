@@ -10,7 +10,9 @@ public class Contract {
     private String id;
     private String number;
     private ContractType type;
+    private String client;
     private Integer price;
     private LocalDate signDate;
+    private LocalDate endDate;
     private LocalDateTime updated;
 }

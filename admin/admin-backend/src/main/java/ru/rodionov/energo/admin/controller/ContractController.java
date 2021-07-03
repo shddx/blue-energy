@@ -13,6 +13,7 @@ import java.util.List;
 public class ContractController {
     private final ContractService contractService;
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping
     public List<Contract> getAll() {
         return contractService.getAll();
