@@ -3,6 +3,7 @@
     <Sidebar />
     <div class="c-wrapper" >
       <Header />
+      <Breadcrumbs />
         <div class="c-body" >
           <main class="c-main">
             <div class="container-fluid">
@@ -21,9 +22,10 @@
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Footer from "./Footer";
+import Breadcrumbs from "@/layout/Breadcrumbs";
 export default {
   name: "Container",
-  components: {Footer, Header, Sidebar}
+  components: {Breadcrumbs, Footer, Header, Sidebar}
 }
 </script>
 
