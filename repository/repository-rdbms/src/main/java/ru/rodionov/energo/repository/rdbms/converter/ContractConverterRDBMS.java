@@ -1,11 +1,8 @@
 package ru.rodionov.energo.repository.rdbms.converter;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-import ru.rodionov.energo.repository.rdbms.domain.ContractDB;
 import ru.rodionov.energo.repository.api.model.Contract;
-
-import java.time.LocalDateTime;
+import ru.rodionov.energo.repository.rdbms.domain.ContractDB;
 
 @Component
 public class ContractConverterRDBMS implements Converter<Contract, ContractDB> {
@@ -39,7 +36,6 @@ public class ContractConverterRDBMS implements Converter<Contract, ContractDB> {
         db.setClient(entity.getClient());
         db.setSignDate(entity.getSignDate());
         db.setEndDate(entity.getEndDate());
-        db.setUpdated(LocalDateTime.now());
 
         return db;
     }

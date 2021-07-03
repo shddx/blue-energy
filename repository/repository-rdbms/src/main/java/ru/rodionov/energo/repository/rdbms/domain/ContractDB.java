@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
 import ru.rodionov.energo.repository.api.model.ContractType;
 
 import javax.persistence.*;
@@ -33,5 +34,6 @@ public class ContractDB {
     @Column(columnDefinition = "DATE")
     private LocalDate endDate;
     @Column(columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
     private LocalDateTime updated;
 }
