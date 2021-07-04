@@ -1,5 +1,6 @@
 package ru.rodionov.energo.repository.api.service;
 
+import org.springframework.data.domain.Pageable;
 import ru.rodionov.energo.repository.api.exception.RepositoryException;
 import ru.rodionov.energo.repository.api.model.Contract;
 
@@ -10,5 +11,5 @@ public interface ContractService {
 
     void save(Contract contract, boolean updating);
 
-    List<Contract> getAll();
+    List<Contract> findPaginated(Pageable pageable);
 }

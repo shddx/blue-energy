@@ -1,6 +1,7 @@
 package ru.rodionov.energo.admin.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.api.service.ContractService;
@@ -15,8 +16,8 @@ public class ContractController {
 
     @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping
-    public List<Contract> getAll() {
-        return contractService.getAll();
+    public List<Contract> getAll(Pageable pageable) {
+        return contractService.findPaginated(pageable);
     }
 
     @GetMapping("/{id}")
