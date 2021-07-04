@@ -17,7 +17,8 @@ declare module '@vue/runtime-core' {
   interface State {
     sidebarShow: boolean,
     sidebarMinimized: boolean
-    contracts: Contract[]
+    contracts: Array<Array<Contract>>
+    pages: number
   }
   // provide typings for `this.$store`
   interface ComponentCustomProperties {

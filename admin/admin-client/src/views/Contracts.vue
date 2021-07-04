@@ -21,7 +21,7 @@
           </tr>
           </thead>
           <tbody>
-          <ContractRow v-for="(contract, index) in contracts"
+          <ContractRow v-for="(contract, index) in contracts[page]"
                        :key="contract.id"
                        :contract="contract"
                        :index="index"/>
@@ -59,15 +59,21 @@ export default {
   name: "Contracts",
   components: {ContractRow},
   data() {
-    return {}
+    return {
+      currentSort: 'index',
+      currentSortDir: 'desc',
+      page: 1
+    }
   },
   computed: {
     ...mapState([
       'contracts'
     ])
   },
+  methods: {
+  },
   created() {
-    this.$store.dispatch('fetchContracts')
+    this.$store.dispatch('fetchContracts', this.page)
   }
 }
 </script>

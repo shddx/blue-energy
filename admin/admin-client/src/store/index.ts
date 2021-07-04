@@ -1,12 +1,14 @@
 import { createStore, StoreOptions } from 'vuex'
 import http from '@/api/index.ts'
 import { CONTRACTS } from '@/api/routes.ts'
+import { Contract } from "@/vuex";
 
 export const store =  createStore({
   state: {
     sidebarShow: true,
     sidebarMinimized: false,
-    contracts: Object
+    contracts: Array<Array<Contract>>(),
+    pages: 0
   },
   mutations: {
     toggleSidebarShow(state) {
@@ -15,8 +17,11 @@ export const store =  createStore({
     toggleSidebarMinimized(state) {
       state.sidebarMinimized = !state.sidebarMinimized;
     },
-    setContracts(state, characters) {
-      state.contracts = characters;
+    setContracts(state, { contracts, page }) {
+      state.contracts[page] = contracts;
+    },
+    setPages(state, pages: number) {
+      state.pages = pages;
     }
   },
   actions: {
@@ -26,11 +31,11 @@ export const store =  createStore({
     toggleSidebarMinimized({commit}) {
       commit('toggleSidebarMinimized');
     },
-    fetchContracts({commit}) {
-      http.get(CONTRACTS)
-        .then(data => {
-          console.log(data.data)
-          commit('setContracts', data.data)
+    fetchContracts({commit}, page: number) {
+      http.get(CONTRACTS(page))
+        .then(({ data }) => {
+          commit('setContracts', {contracts: data.content, page });
+          commit('setPages', data.pages)
         })
         .catch(err => console.log(err))
     }
