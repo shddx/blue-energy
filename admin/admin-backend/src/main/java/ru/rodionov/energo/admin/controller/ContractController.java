@@ -5,20 +5,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import ru.rodionov.energo.repository.api.model.Contract;
+import ru.rodionov.energo.admin.model.PageResponse;
 import ru.rodionov.energo.repository.api.service.ContractService;
 
-import java.util.List;
+import static ru.rodionov.energo.admin.controller.ContractController.URL_PATH;
 
 @RestController
-@RequestMapping("/api/admin/contract")
+@RequestMapping(URL_PATH)
 @RequiredArgsConstructor
 public class ContractController {
+    final static String URL_PATH = "/api/admin/contract";
     private final ContractService contractService;
 
-    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping
-    public Page<Contract> getAll(Pageable pageable) {
-        return contractService.findPaginated(pageable);
+    public PageResponse<Contract> getAll(Pageable pageable) {
+        Page<Contract> page = contractService.findPaginated(pageable);
+        return PageResponse.build(page, URL_PATH);
     }
 
     @GetMapping("/{id}")
