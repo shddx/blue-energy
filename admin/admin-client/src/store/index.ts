@@ -1,6 +1,6 @@
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import http from '@/api/index.ts'
-import { CONTRACTS, CONTRACTS_WITH_SIZE } from '@/api/routes.ts'
+import { CONTRACTS_SORTED, CONTRACTS_WITH_SIZE } from '@/api/routes.ts'
 import { InjectionKey } from 'vue'
 
 export interface Contract {
@@ -64,13 +64,21 @@ export const store = createStore<State>({
           commit('setActivePage', page)
         })
         .catch(err => console.log(err))
+    },
+    fetchContractsSorted ({ state, commit }, { sort, direction }) {
+      http.get(CONTRACTS_SORTED(state.activePage, 10, sort, direction))
+        .then(({ data }) => {
+          console.log(data)
+          commit('setContracts', {contracts: data.content, page: state.activePage})
+        })
+        .catch(err => console.log(err))
     }
   },
   modules: {},
   getters: {}
 })
 
-export function useStore() {
+export function useStore(): Store<State> {
   return baseUseStore(key);
 }
 

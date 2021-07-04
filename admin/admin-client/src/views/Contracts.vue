@@ -9,13 +9,13 @@
           <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Номер</th>
-            <th scope="col">Тип</th>
-            <th scope="col">Клиент</th>
-            <th scope="col">Сума</th>
-            <th scope="col">Подписан</th>
-            <th scope="col">Истекает</th>
-            <th scope="col">Изменен</th>
+            <th scope="col" @click="sortBy('number')">Номер</th>
+            <th scope="col" @click="sortBy('type')">Тип</th>
+            <th scope="col" @click="sortBy('client')">Клиент</th>
+            <th scope="col" @click="sortBy('price')">Сума</th>
+            <th scope="col" @click="sortBy('signDate')">Подписан</th>
+            <th scope="col" @click="sortBy('endDate')">Истекает</th>
+            <th scope="col" @click="sortBy('updated')">Изменен</th>
             <th scope="col" class="fit"></th>
             <th scope="col" class="fit"></th>
           </tr>
@@ -44,8 +44,8 @@ export default defineComponent({
   components: { Pagination, ContractRow},
   data () {
     return {
-      currentSort: 'index',
-      currentSortDir: 'desc'
+      currentSort: 'number',
+      currentSortDir: true
     }
   },
   computed: {
@@ -54,7 +54,17 @@ export default defineComponent({
       'activePage'
     ])
   },
-  methods: {},
+  methods: {
+    sortBy(sort: string) {
+      if (this.currentSort === sort) {
+        this.currentSortDir = !this.currentSortDir;
+      } else {
+        this.currentSort = sort;
+      }
+      let direction = this.currentSortDir ? 'asc' : 'desc';
+      this.$store.dispatch('fetchContractsSorted', { sort, direction} );
+    }
+  },
   created () {
     this.$store.dispatch('fetchContracts', 1)
   }

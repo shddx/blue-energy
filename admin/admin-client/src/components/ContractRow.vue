@@ -30,7 +30,6 @@ export default defineComponent({
   name: "ContractRow",
   data() {
     return {
-      message: 'Hello'
     }
   },
   props: {
