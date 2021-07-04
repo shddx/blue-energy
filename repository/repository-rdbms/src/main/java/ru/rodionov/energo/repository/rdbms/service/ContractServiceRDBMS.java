@@ -1,6 +1,8 @@
 package ru.rodionov.energo.repository.rdbms.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.rodionov.energo.repository.api.exception.RepositoryException;
@@ -20,10 +22,12 @@ public class ContractServiceRDBMS implements ContractService {
     private final Converter<Contract, ContractDB> converter;
 
     @Override
-    public List<Contract> findPaginated(Pageable pageable) {
-        return contractRepo.findAll(pageable).stream()
+    public Page<Contract> findPaginated(Pageable pageable) {
+        Page<ContractDB> pages = contractRepo.findAll(pageable);
+        List<Contract> contracts = contractRepo.findAll(pageable).stream()
                 .map(converter::fromDB)
                 .collect(Collectors.toList());
+        return new PageImpl<>(contracts, pages.getPageable(), pages.getTotalElements());
     }
 
     @Override
