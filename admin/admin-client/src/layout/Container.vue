@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Footer from "./Footer";

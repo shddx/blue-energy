@@ -15,10 +15,11 @@ export interface Contract {
 declare module '@vue/runtime-core' {
   // declare your own store states
   interface State {
-    sidebarShow: boolean,
+    sidebarShow: boolean
     sidebarMinimized: boolean
     contracts: Array<Array<Contract>>
     pages: number
+    activePage: number
   }
   // provide typings for `this.$store`
   interface ComponentCustomProperties {

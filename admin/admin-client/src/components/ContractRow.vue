@@ -23,7 +23,7 @@
 
 <script lang="ts">
 
-import { Contract } from "@/vuex";
+import { Contract } from "@/shims-vuex";
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({

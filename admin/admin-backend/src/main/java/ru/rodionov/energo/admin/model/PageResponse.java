@@ -15,10 +15,10 @@ public class PageResponse<T> {
 
     public static <T> PageResponse<T> build(Page<T> page, String urlPath) {
         int totalPages = page.getTotalPages();
-        int pageNumber = page.getPageable().getPageNumber();
+        int pageNumber = page.getPageable().getPageNumber() + 1;
         String pageUrl = urlPath + "?page=";
-        String previous = page.getPageable().hasPrevious() ? pageUrl + pageNumber : null;
-        String next = pageNumber == totalPages - 1 ? null : pageUrl + (pageNumber + 2);
+        String previous = page.getPageable().hasPrevious() ? pageUrl + (pageNumber - 1) : null;
+        String next = pageNumber == totalPages - 1 ? null : pageUrl + (pageNumber + 1);
 
         return new PageResponse<>(page.getContent(), totalPages, page.getTotalElements(), next, previous);
     }

@@ -21,59 +21,42 @@
           </tr>
           </thead>
           <tbody>
-          <ContractRow v-for="(contract, index) in contracts[page]"
+          <ContractRow v-for="(contract, index) in contracts[activePage]"
                        :key="contract.id"
                        :contract="contract"
                        :index="index"/>
           </tbody>
         </table>
       </div>
-      <nav aria-label="contract navigation">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <router-link class="page-link" to="#">Previous</router-link>
-          </li>
-          <li class="page-item active">
-            <router-link class="page-link" to="#">1</router-link>
-          </li>
-          <li class="page-item">
-            <router-link class="page-link" to="#">2</router-link>
-          </li>
-          <li class="page-item">
-            <router-link class="page-link" to="#">3</router-link>
-          </li>
-          <li class="page-item">
-            <router-link class="page-link" to="#">Next</router-link>
-          </li>
-        </ul>
-      </nav>
+    <Pagination />
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ContractRow from "@/components/ContractRow";
 import {mapActions, mapState} from "vuex";
+import Pagination from "@/components/Pagination";
 
 export default {
   name: "Contracts",
-  components: {ContractRow},
+  components: {Pagination, ContractRow},
   data() {
     return {
       currentSort: 'index',
-      currentSortDir: 'desc',
-      page: 1
+      currentSortDir: 'desc'
     }
   },
   computed: {
     ...mapState([
-      'contracts'
+      'contracts',
+      'activePage'
     ])
   },
   methods: {
   },
   created() {
-    this.$store.dispatch('fetchContracts', this.page)
+    this.$store.dispatch('fetchContracts', 1)
   }
 }
 </script>
