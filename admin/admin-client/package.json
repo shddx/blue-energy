@@ -14,7 +14,6 @@
     "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "direct-vuex": "^1.0.0-rc3",
     "perfect-scrollbar": "^1.5.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",

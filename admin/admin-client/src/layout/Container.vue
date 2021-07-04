@@ -19,10 +19,10 @@
 </template>
 
 <script lang="ts">
-import Sidebar from "./Sidebar";
-import Header from "./Header";
-import Footer from "./Footer";
-import Breadcrumbs from "@/layout/Breadcrumbs";
+import Sidebar from "./Sidebar.vue";
+import Header from "./Header.vue";
+import Footer from "./Footer.vue";
+import Breadcrumbs from "@/layout/Breadcrumbs.vue";
 export default {
   name: "Container",
   components: {Breadcrumbs, Footer, Header, Sidebar}

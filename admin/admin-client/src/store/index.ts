@@ -1,9 +1,30 @@
-import { createStore, StoreOptions } from 'vuex'
+import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import http from '@/api/index.ts'
 import { CONTRACTS, CONTRACTS_WITH_SIZE } from '@/api/routes.ts'
-import { Contract } from "@/shims-vuex";
+import { InjectionKey } from 'vue'
 
-export const store = createStore({
+export interface Contract {
+  id: string,
+  number: string,
+  type: string,
+  client: string,
+  price: number
+  signDate: string,
+  endDate: string,
+  updated: string
+}
+
+interface State {
+  sidebarShow: boolean
+  sidebarMinimized: boolean
+  contracts: Contract[][]
+  totalPages: number
+  activePage: number
+}
+
+export const key: InjectionKey<Store<State>> = Symbol()
+
+export const store = createStore<State>({
   state: {
     sidebarShow: true,
     sidebarMinimized: false,
@@ -36,7 +57,7 @@ export const store = createStore({
       commit('toggleSidebarMinimized');
     },
     fetchContracts ({commit}, page: number) {
-      http.get(CONTRACTS_WITH_SIZE(page, 1))
+      http.get(CONTRACTS_WITH_SIZE(page, 10))
         .then(({data}) => {
           commit('setContracts', {contracts: data.content, page});
           commit('setPages', data.pages)
@@ -48,3 +69,13 @@ export const store = createStore({
   modules: {},
   getters: {}
 })
+
+export function useStore() {
+  return baseUseStore(key);
+}
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $store: Store<State>;
+  }
+}

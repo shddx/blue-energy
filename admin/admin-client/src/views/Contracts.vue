@@ -28,20 +28,21 @@
           </tbody>
         </table>
       </div>
-    <Pagination />
+      <Pagination/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import ContractRow from "@/components/ContractRow";
-import {mapActions, mapState} from "vuex";
-import Pagination from "@/components/Pagination";
+import ContractRow from "@/components/ContractRow.vue";
+import { mapState } from "vuex";
+import Pagination from "@/components/Pagination.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "Contracts",
-  components: {Pagination, ContractRow},
-  data() {
+  components: { Pagination, ContractRow},
+  data () {
     return {
       currentSort: 'index',
       currentSortDir: 'desc'
@@ -53,12 +54,11 @@ export default {
       'activePage'
     ])
   },
-  methods: {
-  },
-  created() {
+  methods: {},
+  created () {
     this.$store.dispatch('fetchContracts', 1)
   }
-}
+})
 </script>
 
 <style scoped>
