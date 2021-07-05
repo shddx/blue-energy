@@ -9,13 +9,13 @@
           <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col" @click="sortBy('number')">Номер</th>
-            <th scope="col" @click="sortBy('type')">Тип</th>
-            <th scope="col" @click="sortBy('client')">Клиент</th>
-            <th scope="col" @click="sortBy('price')">Сума</th>
-            <th scope="col" @click="sortBy('signDate')">Подписан</th>
-            <th scope="col" @click="sortBy('endDate')">Истекает</th>
-            <th scope="col" @click="sortBy('updated')">Изменен</th>
+            <th scope="col" @click="sortBy('number')"><div class="title-container"><span>Номер</span><i :class="arrowClass('number')"></i></div></th>
+            <th scope="col" @click="sortBy('type')"><div class="title-container"><span>Тип</span><i :class="arrowClass('type')"></i></div></th>
+            <th scope="col" @click="sortBy('client')"><div class="title-container"><span>Клиент</span><i :class="arrowClass('client')"></i></div></th>
+            <th scope="col" @click="sortBy('price')"><div class="title-container"><span>Сума</span><i :class="arrowClass('price')"></i></div></th>
+            <th scope="col" @click="sortBy('signDate')"><div class="title-container"><span>Подписан</span><i :class="arrowClass('signDate')"></i></div></th>
+            <th scope="col" @click="sortBy('endDate')"><div class="title-container"><span>Истекает</span><i :class="arrowClass('endDate')"></i></div></th>
+            <th scope="col" @click="sortBy('updated')"><div class="title-container"><span>Изменен</span><i :class="arrowClass('updated')"></i></div></th>
             <th scope="col" class="fit"></th>
             <th scope="col" class="fit"></th>
           </tr>
@@ -28,52 +28,53 @@
           </tbody>
         </table>
       </div>
-      <Pagination/>
+      <Pagination :totalPages="totalPages" :activePage="activePage" @changeActivePage="changeActivePage"/>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { computed } from "vue";
 import ContractRow from "@/components/ContractRow.vue";
-import { mapState } from "vuex";
+import { contractModule } from "@/store/modules/contract-module";
 import Pagination from "@/components/Pagination.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "Contracts",
-  components: { Pagination, ContractRow},
-  data () {
-    return {
-      currentSort: 'number',
-      currentSortDir: true
-    }
-  },
-  computed: {
-    ...mapState([
-      'contracts',
-      'activePage'
-    ])
-  },
-  methods: {
-    sortBy(sort: string) {
-      if (this.currentSort === sort) {
-        this.currentSortDir = !this.currentSortDir;
-      } else {
-        this.currentSort = sort;
-      }
-      let direction = this.currentSortDir ? 'asc' : 'desc';
-      this.$store.dispatch('fetchContractsSorted', { sort, direction} );
-    }
-  },
-  created () {
-    this.$store.dispatch('fetchContracts', 1)
+let currentSort = 'number'
+let sortDirAsc = true
+const contracts = computed(() => contractModule.contracts)
+const activePage = computed(() => contractModule.activePage)
+const totalPages = computed(() => contractModule.totalPages);
+
+contractModule.fetchContracts(1)
+
+function changeActivePage(num: number) {
+  contractModule.fetchContracts(num)
+}
+
+function arrowClass(name: string): string {
+  return currentSort === name ? sortDirAsc ? 'cil-caret-top' : 'cil-caret-bottom' : 'cil-caret-left';
+}
+
+function sortBy(sort: string) {
+  if (currentSort === sort) {
+    sortDirAsc = !sortDirAsc;
+  } else {
+    currentSort = sort;
   }
-})
+  let direction = sortDirAsc ? 'asc' : 'desc';
+  contractModule.fetchContractsSorted({ sort, direction });
+}
 </script>
 
 <style scoped>
 .table th.fit {
   white-space: nowrap;
   width: 1%;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

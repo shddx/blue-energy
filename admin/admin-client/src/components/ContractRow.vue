@@ -1,13 +1,13 @@
 <template>
   <tr>
-    <th scope="row">{{index + 1}}</th>
+    <th scope="row">{{ rowIndex }}</th>
     <td><span class="align-middle">{{contract.number}}</span></td>
     <td>{{contract.type}}</td>
     <td>{{contract.client}}</td>
     <td>{{contract.price}}</td>
     <td>{{contract.signDate}}</td>
     <td>{{contract.endDate}}</td>
-    <td v-if="contract">{{ updatedDate}}</td>
+    <td v-if="contract">{{ updatedDate }}</td>
     <td class="fit">
       <button type="button" class="btn btn-warning btn-block">
         <i class="cil-pen btn-icon"></i>
@@ -21,30 +21,24 @@
   </tr>
 </template>
 
-<script lang="ts">
+<script setup="props" lang="ts">
 
-import { Contract } from "@/store/index.ts"
-import { defineComponent, PropType } from 'vue'
+import type { Contract } from "@/store/interfaces";
+import { computed, defineProps, toRefs } from 'vue'
+import { contractModule } from "@/store/modules/contract-module";
 
-export default defineComponent({
-  name: "ContractRow",
-  data() {
-    return {
-    }
-  },
-  props: {
-    index: Number,
-    contract: {
-      type: Object as PropType<Contract>
-    }
-  },
-  computed: {
-    updatedDate(): string | undefined {
-      let updated = this.contract!.updated;
-      updated = updated.replace('T', ' ')
-      return updated.replace(/\..*/, '')
-    }
-  }
+const props = defineProps<{
+  index: number,
+  contract: Contract
+}>();
+
+const { index } = toRefs(props);
+const { contract }= toRefs(props);
+const rowIndex = computed(() => (contractModule.activePage - 1) * 10 + index.value + 1)
+const updatedDate = computed(() => {
+  let updated = contract.value.updated;
+  updated = updated.replace('T', ' ')
+  return updated.replace(/\..*/, '')
 })
 </script>
 
