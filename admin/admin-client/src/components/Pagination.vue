@@ -8,7 +8,8 @@
         <span class="page-link" @click="setActivePage(activePage - 1)">&lsaquo;</span>
       </li>
 
-      <li class="page-item" v-for="pageNum in rangeWithDots.values()" :key="pageNum" :class="{active: activePage === pageNum}">
+      <li class="page-item" v-for="pageNum in rangeWithDots.values()" :key="pageNum"
+          :class="{active: activePage === pageNum}">
         <span class="page-link" @click="setActivePage(pageNum)">{{ pageNum }}</span>
       </li>
 
@@ -22,59 +23,49 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { key } from '@/store'
 
-export default defineComponent({
-  name: "Pagination",
-  setup() {
-    const store = useStore(key);
-    const delta = 1;
-    let totalPages = computed(() => store.state.totalPages);
-    let activePage = computed(() => store.state.activePage);
-    let left = computed(() => activePage.value - delta);
-    let right = computed(() => activePage.value + delta + 1);
+const store = useStore(key);
+const delta = 1;
 
-    let range = computed(() => {
-      let range = []
-      for (let i = 1; i <= totalPages.value; i++) {
-        if (i === 1 || i === totalPages.value || i >= left.value&& i < right.value) {
-          range.push(i);
-        }
-      }
-      return range;
-    });
-    let rangeWithDots = computed(() => {
-      let temp;
-      let rangeWithDots = []
-      for (let i of range.value) {
-        if (temp) {
-          if (i - temp === 2) {
-            rangeWithDots.push(temp + 1);
-          } else if (i - temp !== 1) {
-            rangeWithDots.push('...');
-          }
-        }
-        rangeWithDots.push(i);
-        temp = i;
-      }
-      return rangeWithDots;
-    })
+const totalPages = computed(() => store.state.totalPages);
+const activePage = computed(() => store.state.activePage);
+const left = computed(() => activePage.value - delta);
+const right = computed(() => activePage.value + delta + 1);
 
-    return {
-      totalPages,
-      activePage,
-      rangeWithDots
-    }
-  },
-  methods: {
-    setActivePage(num: number) {
-      this.$store.dispatch('fetchContracts', num);
+let range = computed(() => {
+  let range = []
+  for (let i = 1; i <= totalPages.value; i++) {
+    if (i === 1 || i === totalPages.value || i >= left.value && i < right.value) {
+      range.push(i);
     }
   }
-})
+  return range;
+});
+
+const rangeWithDots = computed(() => {
+  let temp;
+  let rangeWithDots = []
+  for (let i of range.value) {
+    if (temp) {
+      if (i - temp === 2) {
+        rangeWithDots.push(temp + 1);
+      } else if (i - temp !== 1) {
+        rangeWithDots.push('...');
+      }
+    }
+    rangeWithDots.push(i);
+    temp = i;
+  }
+  return rangeWithDots;
+});
+
+function setActivePage (num: number) {
+  store.dispatch('fetchContracts', num);
+}
 
 </script>
 
