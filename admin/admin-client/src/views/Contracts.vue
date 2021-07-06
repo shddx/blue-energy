@@ -38,6 +38,9 @@ import { computed } from "vue";
 import ContractRow from "@/components/ContractRow.vue";
 import { contractModule } from "@/store/modules/contract-module";
 import Pagination from "@/components/Pagination.vue";
+import { useStore } from "@/store/pinia";
+
+const store = useStore()
 
 let currentSort = 'number'
 let sortDirAsc = true
@@ -52,7 +55,7 @@ function changeActivePage(num: number) {
 }
 
 function arrowClass(name: string): string {
-  return currentSort === name ? sortDirAsc ? 'cil-caret-top' : 'cil-caret-bottom' : 'cil-caret-left';
+  return currentSort === name ? sortDirAsc ? 'cil-caret-top' : 'cil-caret-bottom' : '';
 }
 
 function sortBy(sort: string) {

@@ -29,27 +29,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { mapActions, mapGetters, mapState } from "vuex";
+<script setup lang="ts">
+import { useStore } from "@/store/pinia";
+import { computed } from "vue";
 
-export default {
-  name: "Sidebar",
-  data () {
-    return {
+const store = useStore()
+const sidebarShow = computed(() => store.sidebarShow)
+const sidebarMinimized = computed(() => store.sidebarMinimized)
 
-    }
-  },
-  computed: {
-    ...mapState([
-      'sidebarShow',
-      'sidebarMinimized'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'toggleSidebarMinimized'
-    ])
-  }
+function toggleSidebarMinimized() {
+  store.toggleSidebarMinimized();
 }
 </script>
 

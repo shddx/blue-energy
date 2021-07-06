@@ -35,7 +35,7 @@ const props = defineProps<{
 const { totalPages } = toRefs(props);
 const { activePage } = toRefs(props);
 
-const active = (index) => activePage.value === index
+const active = (index: number) => activePage.value === index
 
 const left = computed(() => activePage.value - delta);
 const right = computed(() => activePage.value + delta + 1);
@@ -68,7 +68,7 @@ const rangeWithDots = computed(() => {
 });
 
 const emit = defineEmit<{
-'changeActivePage'
+  (e: 'changeActivePage', num: number): void
 }>()
 
 function setActivePage (num: number) {

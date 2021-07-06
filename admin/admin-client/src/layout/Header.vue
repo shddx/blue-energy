@@ -29,14 +29,12 @@
   </header>
 </template>
 
-<script lang="ts">
-import {mapActions} from "vuex";
+<script setup lang="ts">
+import { useStore } from "@/store/pinia";
+const store = useStore()
 
-export default {
-  name: "Header",
-  methods: {
-    ...mapActions(['toggleSidebarShow'])
-  }
+function toggleSidebarShow() {
+  store.toggleSidebarShow()
 }
 </script>
 
