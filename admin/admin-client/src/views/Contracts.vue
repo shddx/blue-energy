@@ -38,20 +38,21 @@ import { computed } from "vue";
 import ContractRow from "@/components/ContractRow.vue";
 import { contractModule } from "@/store/modules/contract-module";
 import Pagination from "@/components/Pagination.vue";
-import { useStore } from "@/store/pinia";
+import { useContractStore } from "@/store/pinia/modules/contract-module";
 
-const store = useStore()
+const store = useContractStore()
 
 let currentSort = 'number'
 let sortDirAsc = true
-const contracts = computed(() => contractModule.contracts)
-const activePage = computed(() => contractModule.activePage)
-const totalPages = computed(() => contractModule.totalPages);
+const contracts = computed(() => store.contracts)
+const activePage = computed(() => store.activePage)
+const totalPages = computed(() => store.totalPages);
 
-contractModule.fetchContracts(1)
+//on create
+store.fetchContracts(1)
 
 function changeActivePage(num: number) {
-  contractModule.fetchContracts(num)
+  store.fetchContracts(num)
 }
 
 function arrowClass(name: string): string {
@@ -65,7 +66,7 @@ function sortBy(sort: string) {
     currentSort = sort;
   }
   let direction = sortDirAsc ? 'asc' : 'desc';
-  contractModule.fetchContractsSorted({ sort, direction });
+  store.fetchContractsSorted({ sort, direction });
 }
 </script>
 
