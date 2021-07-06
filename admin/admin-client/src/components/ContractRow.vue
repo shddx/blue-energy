@@ -25,7 +25,9 @@
 
 import type { Contract } from "@/store/interfaces";
 import { computed, defineProps, toRefs } from 'vue'
-import { contractModule } from "@/store/modules/contract-module";
+import { useContractStore } from "@/store/pinia/modules/contract-module";
+
+const store = useContractStore()
 
 const props = defineProps<{
   index: number,
@@ -34,7 +36,7 @@ const props = defineProps<{
 
 const { index } = toRefs(props);
 const { contract }= toRefs(props);
-const rowIndex = computed(() => (contractModule.activePage - 1) * 10 + index.value + 1)
+const rowIndex = computed(() => (store.activePage - 1) * 10 + index.value + 1)
 const updatedDate = computed(() => {
   let updated = contract.value.updated;
   updated = updated.replace('T', ' ')
