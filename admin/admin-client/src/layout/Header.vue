@@ -1,43 +1,27 @@
 <template>
-  <header class="c-header c-header-light px-3">
-    <button class="c-header-toggler" type="button" @click="toggleSidebarShow">
-      <span class="c-header-toggler-icon"></span>
-    </button>
-    <ul class="c-header-nav mr-auto">
-      <li class="c-header-nav-item active">
-        <a class="c-header-nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="c-header-nav-item">
-        <a class="c-header-nav-link" href="#">Link</a>
-      </li>
-      <li class="c-header-nav-item dropdown">
-        <a class="c-header-nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </header>
+  <el-menu :default-active="1" mode="horizontal" @select="handleSelect">
+    <el-menu-item @click="toggleSidebarShow"><span class="burger" :class="burgerIcon"></span></el-menu-item>
+    <el-menu-item index="1">Home</el-menu-item>
+    <el-menu-item index="3">Profile</el-menu-item>
+  </el-menu>
 </template>
 
 <script setup lang="ts">
 import { useStore } from "@/store";
+import { computed, ref } from 'vue'
+
 const store = useStore()
+const burgerIcon = computed(() => store.sidebarShow ? 'el-icon-s-fold' : 'el-icon-s-unfold')
 
 function toggleSidebarShow() {
   store.toggleSidebarShow()
 }
+const activeIndex = ref('1');
+
 </script>
 
 <style scoped>
-
+.burger {
+  font-size: 1.5rem;
+}
 </style>
