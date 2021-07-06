@@ -6,7 +6,6 @@ import '@popperjs/core/dist/umd/popper.min.js'
 import App from './App.vue'
 import { createApp } from 'vue'
 import router from './router'
-import { key, store } from '@/store'
 import { createPinia } from 'pinia'
 
-createApp(App).use(createPinia()).use(store, key).use(router).mount('#app')
+createApp(App).use(createPinia()).use(router).mount('#app')

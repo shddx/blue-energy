@@ -25,7 +25,7 @@
 
 import type { Contract } from "@/store/interfaces";
 import { computed, defineProps, toRefs } from 'vue'
-import { useContractStore } from "@/store/pinia/modules/contract-module";
+import { useContractStore } from "@/store/modules/contract-module";
 
 const store = useContractStore()
 

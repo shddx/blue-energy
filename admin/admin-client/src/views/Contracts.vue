@@ -36,9 +36,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import ContractRow from "@/components/ContractRow.vue";
-import { contractModule } from "@/store/modules/contract-module";
 import Pagination from "@/components/Pagination.vue";
-import { useContractStore } from "@/store/pinia/modules/contract-module";
+import { useContractStore } from "@/store/modules/contract-module";
 
 const store = useContractStore()
 

@@ -1,42 +1,20 @@
-import { createStore, Store, useStore as baseUseStore } from 'vuex'
-import { InjectionKey } from 'vue'
+import { defineStore } from 'pinia'
 
-interface State {
-  sidebarShow: boolean
-  sidebarMinimized: boolean
-}
-
-export const key: InjectionKey<Store<State>> = Symbol()
-
-export const store = createStore<State>({
-  state: {
+// useStore could be anything like useUser, useCart
+export const useStore = defineStore({
+  // unique id of the store across your application
+  id: 'root-store',
+  state: () => ({
+    // all these properties will have their type inferred automatically
     sidebarShow: true,
     sidebarMinimized: false
-  },
-  mutations: {
-    toggleSidebarShow (state) {
-      state.sidebarShow = !state.sidebarShow;
-    },
-    toggleSidebarMinimized (state) {
-      state.sidebarMinimized = !state.sidebarMinimized;
-    }
-  },
+  }),
   actions: {
-    toggleSidebarShow ({commit}) {
-      commit('toggleSidebarShow');
+    toggleSidebarShow () {
+      this.sidebarShow = !this.sidebarShow;
     },
-    toggleSidebarMinimized ({commit}) {
-      commit('toggleSidebarMinimized');
+    toggleSidebarMinimized () {
+      this.sidebarMinimized = !this.sidebarMinimized;
     }
   }
 })
-
-export function useStore(): Store<State> {
-  return baseUseStore(key);
-}
-
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $store: Store<State>;
-  }
-}

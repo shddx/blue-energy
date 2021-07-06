@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from "@/store/pinia";
+import { useStore } from "@/store";
 const store = useStore()
 
 function toggleSidebarShow() {
