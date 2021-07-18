@@ -1,38 +1,20 @@
 <template>
-  <el-header class="app_header">
-    <el-menu class="navbar-menu" :default-active="1" mode="horizontal" @select="handleSelect">
-      <el-menu-item @click="toggleSidebarShow"><span class="burger" :class="burgerIcon"></span></el-menu-item>
-      <el-menu-item index="1">Home</el-menu-item>
-      <el-menu-item index="3">Profile</el-menu-item>
-    </el-menu>
-  </el-header>
+  <header class="layout-main-navbar flex justify-between items-center h-12 relative z-10 overflow-hidden">
+    <div class="flex items-center px-4 flex-wrap h-12 leading-12">
+      <span class="text-2xl cursor-pointer leading-12 el-icon-s-fold" @click="toggleSidebar"/>
+    </div>
+  </header>
 </template>
 
 <script setup lang="ts">
-import { useStore } from "@/store";
-import { computed, ref } from 'vue'
+import {useStore} from "@/store";
 
-const store = useStore()
-const burgerIcon = computed(() => store.sidebarShow ? 'el-icon-s-fold' : 'el-icon-s-unfold')
-
-function toggleSidebarShow () {
-  store.toggleSidebarShow()
+const store = useStore();
+function toggleSidebar() {
+  store.toggleSidebarCollapse(store.sidebarCollapse === 0 ? 1 : 0)
 }
-
-const activeIndex = ref('1');
-
 </script>
 
 <style scoped>
-.burger {
-  font-size: 1.5rem;
-}
 
-.app_header {
-  padding-left: 0;
-}
-
-.navbar-menu {
-  border-bottom: 1px solid #d8dbe0;
-}
 </style>

@@ -6,12 +6,12 @@ export const useStore = defineStore({
   id: 'root-store',
   state: () => ({
     // all these properties will have their type inferred automatically
-    sidebarShow: true,
+    sidebarCollapse: 0,
     sidebarMinimized: false
   }),
   actions: {
-    toggleSidebarShow () {
-      this.sidebarShow = !this.sidebarShow;
+    toggleSidebarCollapse (collapse: number) {
+      this.sidebarCollapse = collapse;
     },
     toggleSidebarMinimized () {
       this.sidebarMinimized = !this.sidebarMinimized;

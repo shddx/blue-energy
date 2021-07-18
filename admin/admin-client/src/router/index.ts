@@ -1,20 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Container from '../layout/Container.vue'
-import Contracts from '../views/Contracts.vue'
 import Houses from '../views/Houses.vue'
+import ContractsPlus from '../views/Contracts.vue'
 
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/contracts',
-    name: 'Contract',
+    name: 'Container',
     component: Container,
     children: [
       {
-        path: 'contracts',
+        path: '/contracts',
         name: 'Contracts',
-        component: Contracts
+        component: ContractsPlus
       },
       {
         path: 'houses',

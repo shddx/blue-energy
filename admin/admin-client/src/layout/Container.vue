@@ -1,29 +1,19 @@
 <template>
-  <el-container class="app_wrapper">
-    <Sidebar/>
-    <el-container direction="vertical">
-      <Header/>
-      <Breadcrumbs/>
-      <el-main>
-        <router-view :key="$route.path"></router-view>
-      </el-main>
-      <Footer/>
-    </el-container>
-  </el-container>
+  <div class="layout flex h-screen">
+    <Sidebar :collapse="collapse"/>
+    <LayoutMain @toggleSidebar="toggleSidebar"/>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import Sidebar from "./Sidebar.vue";
-import Header from "./Header.vue";
-import Footer from "./Footer.vue";
-import Breadcrumbs from "@/layout/Breadcrumbs.vue";
-
+import LayoutMain from "./MainContent.vue";
+export default {
+  name: "Container",
+  components: {LayoutMain, Sidebar}
+}
 </script>
 
 <style scoped>
-.app_wrapper {
-  min-height: 100vh;
-  padding: 0;
-  margin: 0;
-}
+
 </style>

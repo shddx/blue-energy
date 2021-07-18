@@ -21,6 +21,7 @@ export const useContractStore = defineStore({
         .catch(err => console.log(err))
     },
     fetchContractsSorted ({sort, direction}: { sort: string; direction: string }) {
+        console.log(sort, direction)
       http.get(CONTRACTS_SORTED(this.activePage, 10, sort, direction))
         .then(({ data }) => {
           this.contracts[this.activePage] = data.content

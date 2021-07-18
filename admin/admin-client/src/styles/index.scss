@@ -1,0 +1,20 @@
+html,
+body {
+  overflow: hidden;
+  margin: 0;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.transition-width {
+  transition-property: width;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+.is-active {
+  background-color: #409eff;
+}

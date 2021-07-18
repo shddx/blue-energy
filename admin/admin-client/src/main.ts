@@ -1,10 +1,11 @@
-import '@popperjs/core/dist/umd/popper.min.js'
+import '@popperjs/core/dist/umd/popper.min.js';
 import 'element-plus/lib/theme-chalk/index.css';
+import '@/styles/index.scss';
 
-import App from './App.vue'
-import { createApp } from 'vue'
-import router from './router'
-import { createPinia } from 'pinia'
+import App from './App.vue';
+import { createApp } from 'vue';
+import router from './router';
+import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 
 createApp(App)
