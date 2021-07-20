@@ -1,25 +1,34 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Container from '../layout/Container.vue'
-import Houses from '../views/Houses.vue'
-import ContractsPlus from '../views/Contracts.vue'
+import {RouterRecords} from "@/types/RouterRecords";
 
-
-const routes: Array<RouteRecordRaw> = [
+const routes: Array<RouterRecords> = [
   {
     path: '/',
     redirect: '/contracts',
     name: 'Container',
-    component: Container,
+    meta: {
+      title: 'Home',
+      icon: ''
+    },
+    component: () => import('../layout/Container.vue'),
     children: [
       {
         path: '/contracts',
         name: 'Contracts',
-        component: ContractsPlus
+        meta: {
+          title: 'Договоры',
+          icon: 'el-icon-document'
+        },
+        component: () => import('../views/Contracts.vue')
       },
       {
         path: 'houses',
         name: 'Houses',
-        component: Houses
+        meta: {
+          title: 'Дома',
+          icon: 'el-icon-house'
+        },
+        component: () => import('../views/Houses.vue')
       }
     ]
   }
@@ -27,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes: routes as RouteRecordRaw[]
 })
 
 export default router

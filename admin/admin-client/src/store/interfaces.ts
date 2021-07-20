@@ -8,3 +8,7 @@ export interface Contract {
   endDate: string,
   updated: string
 }
+export interface Breadcrumb {
+  path: string,
+  name: string
+}

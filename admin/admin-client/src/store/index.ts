@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import {Breadcrumb} from "@/store/interfaces";
 
 // useStore could be anything like useUser, useCart
 export const useStore = defineStore({
@@ -7,7 +8,8 @@ export const useStore = defineStore({
   state: () => ({
     // all these properties will have their type inferred automatically
     sidebarCollapse: 0,
-    sidebarMinimized: false
+    sidebarMinimized: false,
+    menuList: Array<Breadcrumb>()
   }),
   actions: {
     toggleSidebarCollapse (collapse: number) {
