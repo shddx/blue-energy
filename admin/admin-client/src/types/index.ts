@@ -11,3 +11,7 @@ export interface RouterRecords {
     component: (() => Promise<typeof import('*.vue')>) | string
     children?: Array<RouterRecords>
 }
+export enum ServiceTypes {
+    VDGO = 'ВДГО',
+    VKGO = 'ВКГО'
+}
