@@ -4,7 +4,7 @@ import {RouterRecords} from "@/types/RouterRecords";
 const routes: Array<RouterRecords> = [
   {
     path: '/',
-    redirect: '/contracts',
+    redirect: 'contracts',
     name: 'Container',
     meta: {
       title: 'Home',
@@ -13,7 +13,7 @@ const routes: Array<RouterRecords> = [
     component: () => import('../layout/Container.vue'),
     children: [
       {
-        path: '/contracts',
+        path: 'contracts',
         name: 'Contracts',
         meta: {
           title: 'Договоры',

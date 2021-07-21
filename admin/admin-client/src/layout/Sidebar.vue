@@ -7,13 +7,13 @@
     <div class="layout-sidebar-logo flex h-12 relative flex-center shadow-lg">Title</div>
     <el-menu
         class="border-r-0"
-        default-active="contracts"
+        :default-active="currentPath"
         :collapse-transition='false'
         text-color="white"
         active-text-color="white"
         :unique-opened='true'
-        router>
-      <el-menu-item index="contracts" class="sidebar-item">
+        router="true">
+      <el-menu-item index="contracts" class="sidebar-item" route="">
         <i class="el-icon-document"></i>
         <span v-if="collapse === 0">Договоры</span>
       </el-menu-item>
@@ -29,9 +29,12 @@
 
 import {useStore} from "@/store";
 import {computed} from "vue";
+import {useRouter} from "vue-router";
 
 const store = useStore();
 const collapse = computed(() => store.sidebarCollapse);
+const router = useRouter();
+const currentPath = computed(() => router.currentRoute.value.path.replace('/', ''))
 </script>
 
 <style scoped>

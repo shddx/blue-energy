@@ -1,16 +1,16 @@
 <template>
   <div class="layout flex h-screen">
-    <Sidebar :collapse="collapse"/>
-    <LayoutMain @toggleSidebar="toggleSidebar"/>
+    <Sidebar />
+    <MainContent @toggleSidebar="toggleSidebar"/>
   </div>
 </template>
 
 <script lang="ts">
 import Sidebar from "./Sidebar.vue";
-import LayoutMain from "./MainContent.vue";
+import MainContent from "./MainContent.vue";
 export default {
   name: "Container",
-  components: {LayoutMain, Sidebar}
+  components: {MainContent, Sidebar}
 }
 </script>
 

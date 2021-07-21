@@ -27,6 +27,8 @@ const breadcrumbs = computed(() => {
     return {title, path};
   })
 })
+
+
 </script>
 
 <style scoped>
