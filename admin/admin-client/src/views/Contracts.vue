@@ -1,6 +1,29 @@
 <template>
-  <div class="layout-main-content flex-1 overflow-hidden">
-    <div class="page m-3 relative">
+  <div class="layout-main-content flex-1 overflow-hidden p-4">
+    <div class="advanced-search bg-white relative shadow text-gray-600 mb-3 px-3">
+      <el-row class="flex justify-between items-center h-12" :class="{'border-b': showAdvancedSearch}">
+        <span class="flex items-center">Расширенный поиск</span>
+        <el-button :icon="advSearchButton.icon" size='mini' type="primary" @click='showAdvancedSearch = !showAdvancedSearch'>{{advSearchButton.text}}
+        </el-button>
+      </el-row>
+      <el-row class="transition-height duration-200 overflow-hidden" :class="searchStyles">
+        <span>FILTERS</span>
+      </el-row>
+      <!--    <el-card class="m-3" :body-style="{padding: '0px', height: 'auto'}">-->
+      <!--      <template #header>-->
+      <!--        <div class="card-header flex justify-between align-center">-->
+      <!--          <span class="flex items-center">Расширенный поиск</span>-->
+      <!--          <el-button icon='el-icon-search' size='mini' @click='showAdvancedSearch = !showAdvancedSearch'>Показать</el-button>-->
+      <!--        </div>-->
+      <!--      </template>-->
+      <!--      <div class="card-body transition-transform transform origin-top duration-200 overflow-hidden h-auto" :class="searchStyles">-->
+      <!--        <div v-for="o in 4" :key="o">-->
+      <!--          {{'List item ' + o }}-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--    </el-card>-->
+    </div>
+    <div class="page relative">
       <el-table
           class="shadow"
           :data="contracts[activePage]"
@@ -65,7 +88,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {useContractStore} from "@/store/modules/contract-module";
 
 const store = useContractStore()
@@ -74,12 +97,15 @@ store.fetchContracts(1);
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
+const showAdvancedSearch = ref(false)
+const searchStyles = computed(() => showAdvancedSearch.value ? 'h-12' : 'h-0')
+const advSearchButton = computed(() => showAdvancedSearch.value ? {icon: 'el-icon-arrow-up', text: 'Скрыть' }: {icon: 'el-icon-arrow-down', text: 'Показать'})
 
 function formatUpdated(row, column, cellValue, index) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
 }
 
-function sortTable({ prop, order }) {
+function sortTable({prop, order}) {
   if (prop == null || order === null) {
     store.fetchContracts(activePage.value)
     return
@@ -90,6 +116,10 @@ function sortTable({ prop, order }) {
 </script>
 
 <style scoped>
+::v-deep(.el-card__header) {
+  padding: 7px 15px;
+}
+
 .layout-main-content {
   background-color: #f0f2f5;
 }

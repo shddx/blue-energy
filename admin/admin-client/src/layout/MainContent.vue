@@ -1,6 +1,6 @@
 <template>
   <div class="layout-main flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-    <Header @toggleSidebar="$emit('toggleSidebar')"/>
+    <Header />
     <Breadcrumb/>
     <router-view :key="$route.path"/>
   </div>

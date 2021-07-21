@@ -12,7 +12,7 @@
         text-color="white"
         active-text-color="white"
         :unique-opened='true'
-        router="true">
+        router>
       <el-menu-item index="contracts" class="sidebar-item" route="">
         <i class="el-icon-document"></i>
         <span v-if="collapse === 0">Договоры</span>

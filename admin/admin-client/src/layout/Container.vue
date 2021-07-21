@@ -1,7 +1,7 @@
 <template>
   <div class="layout flex h-screen">
     <Sidebar />
-    <MainContent @toggleSidebar="toggleSidebar"/>
+    <MainContent/>
   </div>
 </template>
 

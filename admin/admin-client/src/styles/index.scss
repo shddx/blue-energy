@@ -7,10 +7,6 @@ body {
 @tailwind components;
 @tailwind utilities;
 
-.transition-width {
-  transition-property: width;
-}
-
 .flex-center {
   justify-content: center;
   align-items: center;
