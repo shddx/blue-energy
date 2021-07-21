@@ -9,19 +9,6 @@
       <el-row class="transition-height duration-200 overflow-hidden" :class="searchStyles">
         <span>FILTERS</span>
       </el-row>
-      <!--    <el-card class="m-3" :body-style="{padding: '0px', height: 'auto'}">-->
-      <!--      <template #header>-->
-      <!--        <div class="card-header flex justify-between align-center">-->
-      <!--          <span class="flex items-center">Расширенный поиск</span>-->
-      <!--          <el-button icon='el-icon-search' size='mini' @click='showAdvancedSearch = !showAdvancedSearch'>Показать</el-button>-->
-      <!--        </div>-->
-      <!--      </template>-->
-      <!--      <div class="card-body transition-transform transform origin-top duration-200 overflow-hidden h-auto" :class="searchStyles">-->
-      <!--        <div v-for="o in 4" :key="o">-->
-      <!--          {{'List item ' + o }}-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--    </el-card>-->
     </div>
     <div class="page relative">
       <el-table
@@ -70,16 +57,20 @@
             :formatter="formatUpdated">
         </el-table-column>
         <el-table-column
-            align="right">
+            align="center" width="minmax(50px, 100px)">
           <template #default="scope">
             <el-button
-                size="mini"
-                @click="handleEdit(scope.$index, scope.row)">Edit
+                size="small"
+                icon="el-icon-edit"
+                @click="handleEdit(scope.$index, scope.row)"
+            circle>
             </el-button>
             <el-button
-                size="mini"
+                size="small"
+                icon="el-icon-delete"
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)">Delete
+                @click="handleDelete(scope.$index, scope.row)"
+                circle>
             </el-button>
           </template>
         </el-table-column>
