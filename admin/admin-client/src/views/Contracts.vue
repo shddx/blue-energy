@@ -1,7 +1,8 @@
 <template>
   <div class="layout-main-content flex-1 overflow-hidden p-4">
     <div class="advanced-search bg-white relative shadow text-gray-600 mb-3 px-3 rounded">
-      <el-row class="flex justify-between items-center h-12 cursor-pointer" :class="{'border-b': showAdvancedSearch}" @click='showAdvancedSearch = !showAdvancedSearch'>
+      <el-row class="flex justify-between items-center h-12 cursor-pointer" :class="{'border-b': showAdvancedSearch}"
+              @click='showAdvancedSearch = !showAdvancedSearch'>
         <span class="flex items-center">Расширенный поиск</span>
         <i :class="advSearchButton.icon"></i>
       </el-row>
@@ -11,7 +12,19 @@
             <div>
               <el-input v-model='searchForm.contractNumber' placeholder='Номер договора' prefix-icon="el-icon-search"/>
             </div>
-            <el-date-picker v-model='searchForm.signDate' type='daterange' range-separator='до' start-placeholder='От даты'
+            <el-select v-model="searchForm.type" placeholder="Select">
+              <el-option
+                  v-for="item in ServiceTypes"
+                  :key="item"
+                  :label="item"
+                  :value="item">
+              </el-option>
+            </el-select>
+            <div>
+              <el-input v-model='searchForm.client' placeholder='Имя клиента' prefix-icon="el-icon-search"/>
+            </div>
+            <el-date-picker v-model='searchForm.signDate' type='daterange' range-separator='до'
+                            start-placeholder='От даты'
                             end-placeholder='До даты'/>
           </el-row>
         </el-form>
