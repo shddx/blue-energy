@@ -4,7 +4,7 @@
             :gutter="15"
             @click='showAdvancedSearch = !showAdvancedSearch'>
       <span class="flex items-center">Расширенный поиск</span>
-      <i :class="advSearchButton.icon"></i>
+      <i :class="advSearchButton"></i>
     </el-row>
     <el-row :gutter="15" class="transition-height duration-200 overflow-hidden flex flex-col text-sm"
             :class="searchStyles">
@@ -13,13 +13,13 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "SearchForm",
-  props: {
-    showAdvancedSearch: boolean
-  }
-}
+<script setup lang="ts">
+import {computed, defineProps} from "vue";
+const props = defineProps<{
+  showAdvancedSearch: Boolean
+}>();
+const searchStyles = computed(() => props.showAdvancedSearch ? 'h-44' : 'h-0')
+const advSearchButton = computed(() => props.showAdvancedSearch ?  'el-icon-arrow-up' : 'el-icon-arrow-down' )
 </script>
 
 <style scoped>

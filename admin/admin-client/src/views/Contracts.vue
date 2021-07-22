@@ -1,72 +1,63 @@
 <template>
-  <div class="layout-main-content flex-1 overflow-hidden p-4">
-    <div class="advanced-search bg-white relative shadow text-gray-600 mb-3 px-3 rounded">
-      <el-row class="flex justify-between items-center h-12 cursor-pointer" :class="{'border-b': showAdvancedSearch}"
-              :gutter="15"
-              @click='showAdvancedSearch = !showAdvancedSearch'>
-        <span class="flex items-center">Расширенный поиск</span>
-        <i :class="advSearchButton.icon"></i>
-      </el-row>
-      <el-row :gutter="15" class="transition-height duration-200 overflow-hidden flex flex-col text-sm"
-              :class="searchStyles">
-        <el-form ref='form' :model='searchForm' size='mini'>
-          <el-row :gutter='15' class="py-2" justify="start">
-            <el-col :xs='24' :sm='12' :xl='10'>
-              <el-form-item label="Номер договора:">
-                <el-input v-model='searchForm.contractNumber' placeholder='Номер договора'
-                          prefix-icon="el-icon-search"/>
-              </el-form-item>
-            </el-col>
-            <el-col :xs='24' :sm='12' :xl='10'>
-              <el-form-item label="Имя клиента:">
-                <el-input :model='searchForm.client' placeholder='Имя клиента' prefix-icon="el-icon-search"/>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter='15'>
-            <el-col :xs='24' :sm='12' :xl='10'>
-              <el-form-item label="Имя клиента:">
-                <el-row justify="start">
-                  <el-col :xs="24" :sm="11" :xl="11">
-                    <el-form-item prop="signDateLower">
-                      <el-date-picker v-model='searchForm.signDateLower' type='date'
-                                      placeholder='От даты' class="w-full"/>
-                    </el-form-item>
-                  </el-col>
-                  <el-col class="hidden-xs-only text-center" :sm="2" :xl="2">-</el-col>
-                  <el-col :xs="24" :sm="11" :xl="11">
-                    <el-form-item prop="signDateUpper">
-                      <el-date-picker v-model='searchForm.signDateUpper' type='date'
-                                      placeholder='До даты' class="w-full"/>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-              </el-form-item>
-            </el-col>
-            <el-col :xs='24' :sm='12' :xl='10'>
-              <el-form-item label="Тип договора:">
-                <el-select v-model="searchForm.type" placeholder="Select">
-                  <el-option
-                      v-for="item in ServiceTypes"
-                      :key="item"
-                      :label="item"
-                      :value="item">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :xs='24' :sm='20' :xl='20'>
+  <TablePage>
+    <template #form>
+      <el-form ref='form' :model='searchForm' size='mini'>
+        <el-row :gutter='15' class="py-2" justify="start">
+          <el-col :xs='24' :sm='12' :xl='10'>
+            <el-form-item label="Номер договора:">
+              <el-input v-model='searchForm.contractNumber' placeholder='Номер договора'
+                        prefix-icon="el-icon-search"/>
+            </el-form-item>
+          </el-col>
+          <el-col :xs='24' :sm='12' :xl='10'>
+            <el-form-item label="Имя клиента:">
+              <el-input :model='searchForm.client' placeholder='Имя клиента' prefix-icon="el-icon-search"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter='15'>
+          <el-col :xs='24' :sm='12' :xl='10'>
+            <el-form-item label="Имя клиента:">
               <el-row justify="start">
-              <el-button type="primary" icon="el-icon-search">Искать</el-button>
+                <el-col :xs="24" :sm="11" :xl="11">
+                  <el-form-item prop="signDateLower">
+                    <el-date-picker v-model='searchForm.signDateLower' type='date'
+                                    placeholder='От даты' class="w-full"/>
+                  </el-form-item>
+                </el-col>
+                <el-col class="hidden-xs-only text-center" :sm="2" :xl="2">-</el-col>
+                <el-col :xs="24" :sm="8" :xl="11">
+                  <el-form-item prop="signDateUpper">
+                    <el-date-picker v-model='searchForm.signDateUpper' type='date'
+                                    placeholder='До даты' class="w-full"/>
+                  </el-form-item>
+                </el-col>
               </el-row>
-            </el-col>
-          </el-row>
-        </el-form>
-      </el-row>
-    </div>
-    <div class="page relative">
+            </el-form-item>
+          </el-col>
+          <el-col :xs='24' :sm='12' :xl='10'>
+            <el-form-item label="Тип договора:">
+              <el-select v-model="searchForm.type" placeholder="Select">
+                <el-option
+                    v-for="item in ServiceTypes"
+                    :key="item"
+                    :label="item"
+                    :value="item">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs='24' :sm='20' :xl='20'>
+            <el-row justify="start">
+              <el-button type="primary" icon="el-icon-search">Искать</el-button>
+            </el-row>
+          </el-col>
+        </el-row>
+      </el-form>
+    </template>
+    <template #table>
       <el-table
           class="shadow"
           :data="contracts[activePage]"
@@ -99,13 +90,15 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>
-  </div>
+    </template>
+  </TablePage>
 </template>
+
 <script setup lang="ts">
-import {computed, ref, reactive} from "vue";
-import {useContractStore} from "@/store/modules/contract-module";
+import TablePage from "@/components/TablePage.vue";
 import {ServiceTypes} from "@/types";
+import {computed, reactive} from "vue";
+import {useContractStore} from "@/store/modules/contract-module";
 
 interface SearchForm {
   contractNumber: string
@@ -122,18 +115,11 @@ const searchForm: SearchForm = reactive({
   signDateUpper: '',
   type: ServiceTypes.VDGO
 })
-
 const store = useContractStore()
 store.fetchContracts(1);
-
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
-const showAdvancedSearch = ref(false)
-const searchStyles = computed(() => showAdvancedSearch.value ? 'h-44' : 'h-0')
-const advSearchButton = computed(() => showAdvancedSearch.value ? {
-  icon: 'el-icon-arrow-up',
-} : {icon: 'el-icon-arrow-down'})
 
 function formatUpdated(row, column, cellValue, index) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
@@ -150,16 +136,11 @@ function sortTable({prop, order}) {
 </script>
 
 <style scoped>
-::v-deep(.el-card__header) {
-  padding: 7px 15px;
-}
-
 ::v-deep(.el-select),
 ::v-deep(.el-date-editor.el-input),
 ::v-deep(.el-date-editor.el-input__inner) {
   width: 100%;
 }
-
 .layout-main-content {
   background-color: #f0f2f5;
 }

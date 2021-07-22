@@ -4,10 +4,8 @@
 </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Houses"
-}
+<script setup lang="ts">
+
 </script>
 
 <style scoped>
