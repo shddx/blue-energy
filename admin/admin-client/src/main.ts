@@ -1,5 +1,6 @@
 import '@popperjs/core/dist/umd/popper.min.js';
 import 'element-plus/lib/theme-chalk/index.css';
+import 'element-plus/lib/theme-chalk/display.css';
 import '@/styles/index.scss';
 
 import App from './App.vue';
