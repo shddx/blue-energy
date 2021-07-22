@@ -51,7 +51,7 @@
         <el-row>
           <el-col :xs='24' :sm='20' :xl='20'>
             <el-row justify="start">
-              <el-button type="primary" icon="el-icon-search">Искать</el-button>
+              <el-button type="primary" icon="el-icon-search" @click="submit">Искать</el-button>
             </el-row>
           </el-col>
         </el-row>
