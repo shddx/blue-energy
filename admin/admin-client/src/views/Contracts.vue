@@ -1,7 +1,7 @@
-<template>
+﻿<template>
   <TablePage>
     <template #form>
-      <el-form ref='form' :model='searchForm' size='mini'>
+      <el-form :model='searchForm' size='mini'>
         <el-row :gutter='15' class="py-2" justify="start">
           <el-col :xs='24' :sm='12' :xl='10'>
             <el-form-item label="Номер договора:">
@@ -51,7 +51,7 @@
         <el-row>
           <el-col :xs='24' :sm='20' :xl='20'>
             <el-row justify="start">
-              <el-button type="primary" icon="el-icon-search" @click="submit">Искать</el-button>
+              <el-button type="primary" icon="el-icon-search">Искать</el-button>
             </el-row>
           </el-col>
         </el-row>
@@ -77,14 +77,12 @@
             <el-button
                 size="small"
                 icon="el-icon-edit"
-                @click="handleEdit(scope.$index, scope.row)"
                 circle>
             </el-button>
             <el-button
                 size="small"
                 icon="el-icon-delete"
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)"
                 circle>
             </el-button>
           </template>
@@ -121,12 +119,12 @@ const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
 
-function formatUpdated(row, column, cellValue, index) {
+function formatUpdated(row: number, column:number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
 }
 
-function sortTable({prop, order}) {
-  if (prop == null || order === null) {
+function sortTable({prop, order}: {prop: string | null, order: string | null}) {
+  if (prop == null || order == null) {
     store.fetchContracts(activePage.value)
     return
   }

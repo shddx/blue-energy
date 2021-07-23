@@ -1,6 +1,6 @@
 <template>
   <div class="layout-main-content flex-1 overflow-hidden p-4">
-    <SearchForm :showAdvancedSearch="false">
+    <SearchForm>
         <template #form>
           <slot name="form" />
         </template>

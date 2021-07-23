@@ -19,6 +19,4 @@
         <module>repository-api</module>
         <module>repository-rdbms</module>
     </modules>
-
-
 </project>
