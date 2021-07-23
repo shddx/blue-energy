@@ -1,5 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import {RouterRecords} from "@/types";
+import {RouterRecords, ZObject} from "@/types";
+import Container from '../layout/Container.vue'
+import Contracts from '../views/Contracts.vue'
+import Houses from '../views/Houses.vue'
+
+const Components:ZObject<() => Promise<typeof import('*.vue')>> = {
+  Container: (() => import('@/layout/Container.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+  Contracts: (() => import('@/views/Contracts.vue')) as unknown as () => Promise<typeof import('*.vue')>,
+  Houses: (() => import('@/views/Houses.vue')) as unknown as () => Promise<typeof import('*.vue')>
+}
 
 const routes: Array<RouterRecords> = [
   {
@@ -10,7 +19,7 @@ const routes: Array<RouterRecords> = [
       title: 'Home',
       icon: ''
     },
-    component: () => import('../layout/Container.vue'),
+    component: Components['Container'],
     children: [
       {
         path: 'contracts',
@@ -19,7 +28,7 @@ const routes: Array<RouterRecords> = [
           title: 'Договоры',
           icon: 'el-icon-document'
         },
-        component: () => import('../views/Contracts.vue')
+        component: Components['Contracts']
       },
       {
         path: 'houses',
@@ -28,7 +37,7 @@ const routes: Array<RouterRecords> = [
           title: 'Дома',
           icon: 'el-icon-house'
         },
-        component: () => import('../views/Houses.vue')
+        component: Components['Houses']
       }
     ]
   }

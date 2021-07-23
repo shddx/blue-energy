@@ -1,11 +1,13 @@
 <template>
-<div>
-  Houses
-</div>
+  <div>
+    Houses
+  </div>
 </template>
 
-<script setup lang="ts">
-
+<script>
+export default {
+  name: "Houses"
+}
 </script>
 
 <style scoped>

@@ -1,3 +1,5 @@
+import {DefineComponent, defineComponent} from "vue";
+
 export interface RouterRecords {
     parentId?: number | string
     id?: number | string
@@ -14,4 +16,8 @@ export interface RouterRecords {
 export enum ServiceTypes {
     VDGO = 'ВДГО',
     VKGO = 'ВКГО'
+}
+
+export interface ZObject<T> {
+    [index: string]: T
 }
