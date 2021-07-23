@@ -1,5 +1,5 @@
 <template>
-  <div class="advanced-search bg-white relative shadow text-gray-600 mb-3 px-3 rounded">
+  <div class="advanced-search bg-white relative shadow text-gray-600 mb-3 px-4 rounded">
     <el-row class="flex justify-between items-center h-12 cursor-pointer" :class="{'border-b': showAdvancedSearch}"
             :gutter="15"
             @click='showAdvancedSearch = !showAdvancedSearch'>
