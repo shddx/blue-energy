@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import {RouterRecords, ZObject} from "@/types";
-import Container from '../layout/Container.vue'
-import Contracts from '../views/Contracts.vue'
-import Houses from '../views/Houses.vue'
 
 const Components:ZObject<() => Promise<typeof import('*.vue')>> = {
   Container: (() => import('@/layout/Container.vue')) as unknown as () => Promise<typeof import('*.vue')>,
