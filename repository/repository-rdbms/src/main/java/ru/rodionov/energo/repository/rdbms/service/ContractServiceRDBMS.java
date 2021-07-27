@@ -24,7 +24,7 @@ public class ContractServiceRDBMS implements ContractService {
     @Override
     public Page<Contract> findPaginated(Pageable pageable) {
         Page<ContractDB> pages = contractRepo.findAll(pageable);
-        List<Contract> contracts = contractRepo.findAll(pageable).stream()
+        List<Contract> contracts = pages.stream()
                 .map(converter::fromDB)
                 .collect(Collectors.toList());
         return new PageImpl<>(contracts, pages.getPageable(), pages.getTotalElements());
