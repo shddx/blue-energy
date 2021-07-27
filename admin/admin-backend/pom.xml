@@ -69,7 +69,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <fork>true</fork>
                     <skip>false</skip>
                     <mainClass>ru.rodionov.energo.admin.AdminBackendApplication</mainClass>
                 </configuration>
