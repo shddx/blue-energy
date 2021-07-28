@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>admin</artifactId>
         <groupId>ru.rodionov.energo</groupId>
-        <relativePath>../pom.xml</relativePath>
+        <artifactId>blue-energy</artifactId>
+        <relativePath>../../pom.xml</relativePath>
         <version>${revision}</version>
     </parent>
 
@@ -18,15 +18,18 @@
         <dependency>
             <groupId>ru.rodionov.energo</groupId>
             <artifactId>admin-client</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.rodionov.energo</groupId>
             <artifactId>repository-api</artifactId>
+            <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>ru.rodionov.energo</groupId>
             <artifactId>repository-rdbms</artifactId>
+            <version>${project.parent.version}</version>
             <scope>compile</scope>
         </dependency>
 
