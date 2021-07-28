@@ -61,6 +61,7 @@
     </dependencies>
 
     <build>
+        <finalName>blue-energy-bundle</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
