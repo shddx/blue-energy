@@ -75,16 +75,16 @@
             align="center" width="minmax(60px, 100px)">
           <template #default="scope">
             <el-button
-                size="small"
+                size="mini"
                 icon="el-icon-edit"
-                circle>
+                round>
             </el-button>
             <el-button
                 @click.prevent="deleteContract(scope.$index, scope.row)"
-                size="small"
+                size="mini"
                 icon="el-icon-delete"
                 type="danger"
-                circle>
+                round>
             </el-button>
           </template>
         </el-table-column>
