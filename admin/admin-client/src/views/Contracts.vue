@@ -80,6 +80,7 @@
                 circle>
             </el-button>
             <el-button
+                @click.prevent="deleteContract(scope.$index, scope.row)"
                 size="small"
                 icon="el-icon-delete"
                 type="danger"
@@ -97,6 +98,7 @@ import TablePage from "@/components/TablePage.vue";
 import {ServiceTypes} from "@/types";
 import {computed, reactive} from "vue";
 import {useContractStore} from "@/store/modules/contract-module";
+import type {Contract} from "@/store/interfaces";
 
 interface SearchForm {
   contractNumber: string
@@ -121,6 +123,10 @@ const totalPages = computed(() => store.totalPages);
 
 function formatUpdated(row: number, column:number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
+}
+
+function deleteContract(id: number, contract: Contract) {
+  store.deleteContract(contract);
 }
 
 function sortTable({prop, order}: {prop: string | null, order: string | null}) {
