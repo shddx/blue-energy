@@ -66,3 +66,5 @@ The application will start running at http://localhost:4333.
 - Element plus
 - Vite
 - Tailwind
+
+ci test
