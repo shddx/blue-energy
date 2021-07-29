@@ -11,4 +11,6 @@ public interface ContractService {
     void save(Contract contract, boolean updating);
 
     Page<Contract> findPaginated(Pageable pageable);
+
+    void delete(String id);
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.rodionov.energo.repository.api.exception.RepositoryException;
 import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.api.service.ContractService;
@@ -38,7 +39,14 @@ public class ContractServiceRDBMS implements ContractService {
     }
 
     @Override
+    @Transactional
     public void save(Contract contract, boolean updating) {
         contractRepo.save(converter.toDB(contract, updating));
+    }
+
+    @Override
+    @Transactional
+    public void delete(String id) {
+        contractRepo.deleteById(id);
     }
 }

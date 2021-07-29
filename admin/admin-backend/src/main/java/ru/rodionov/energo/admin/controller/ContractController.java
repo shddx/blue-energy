@@ -21,7 +21,7 @@ public class ContractController {
 
     @GetMapping
     public PageResponse<Contract> getAll(@SortDefault(sort = "signDate",
-            direction = Sort.Direction.DESC) Pageable pageable, @RequestParam(value = "sort", required = false) String sort) {
+            direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Contract> page = contractService.findPaginated(pageable);
         return PageResponse.build(page, URL_PATH);
     }
@@ -29,6 +29,16 @@ public class ContractController {
     @GetMapping("/{id}")
     public Contract get(@PathVariable String id) {
         return contractService.get(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) {
+        contractService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable String id, @RequestBody Contract contract) {
+        contractService.save(contract, true);
     }
 
     @PostMapping
