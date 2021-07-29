@@ -93,6 +93,7 @@
           layout="prev, pager, sizes, next"
           @current-change="updateTable"
           @size-change="updateSize"
+          :page-sizes='[10, 20, 50, 100]'
           :page-size="pageSize"
           :total="total"
           :current-page="activePage"
@@ -128,8 +129,7 @@ const store = useContractStore()
 store.fetchContracts(1);
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
-// seems to be a bug with element ui, have to multiply by 10
-const totalPages = computed(() => store.totalPages * 10);
+const totalPages = computed(() => store.totalPages);
 const pageSize = computed(() => store.pageSize)
 const total = computed(() => store.total)
 
