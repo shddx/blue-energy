@@ -8,6 +8,8 @@ export const useContractStore = defineStore({
     state: () => ({
         totalPages: 0,
         activePage: 0,
+        pageSize: 10,
+        total: 0,
         contracts: Array<Array<Contract>>()
     }),
     actions: {
@@ -15,16 +17,17 @@ export const useContractStore = defineStore({
             this.fetchContracts(this.activePage);
         },
         fetchContracts(page: number) {
-            http.get(CONTRACTS(page, 10))
+            http.get(CONTRACTS(page, this.pageSize))
                 .then(({data}) => {
                     this.activePage = page
                     this.totalPages = data.pages
+                    this.total = data.total
                     this.contracts[page] = data.content
                 })
                 .catch(err => console.log(err))
         },
         fetchContractsSorted({sort, direction}: { sort: string; direction: string }) {
-            http.get(CONTRACTS_SORTED(this.activePage, 10, sort, direction))
+            http.get(CONTRACTS_SORTED(this.activePage, this.pageSize, sort, direction))
                 .then(({data}) => {
                     this.contracts[this.activePage] = data.content
                 })

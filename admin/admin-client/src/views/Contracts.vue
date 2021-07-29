@@ -89,6 +89,15 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+          layout="prev, pager, sizes, next"
+          @current-change="updateTable"
+          @size-change="updateSize"
+          :page-size="pageSize"
+          :total="total"
+          :current-page="activePage"
+          :page-count="totalPages">
+      </el-pagination>
     </template>
   </TablePage>
 </template>
@@ -119,7 +128,10 @@ const store = useContractStore()
 store.fetchContracts(1);
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
-const totalPages = computed(() => store.totalPages);
+// seems to be a bug with element ui, have to multiply by 10
+const totalPages = computed(() => store.totalPages * 10);
+const pageSize = computed(() => store.pageSize)
+const total = computed(() => store.total)
 
 function formatUpdated(row: number, column:number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
@@ -127,6 +139,16 @@ function formatUpdated(row: number, column:number, cellValue: string) {
 
 function deleteContract(id: number, contract: Contract) {
   store.deleteContract(contract);
+}
+
+function updateSize(newSize: number) {
+  store.pageSize = newSize;
+  store.updateContracts();
+}
+
+function updateTable(page: number) {
+  store.activePage = page;
+  store.updateContracts();
 }
 
 function sortTable({prop, order}: {prop: string | null, order: string | null}) {

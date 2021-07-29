@@ -5,7 +5,7 @@
           <slot name="form" />
         </template>
     </SearchForm>
-    <div class="page relative">
+    <div class="page relative bg-white border shadow">
       <slot name="table"/>
     </div>
   </div>
