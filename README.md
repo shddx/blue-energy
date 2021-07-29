@@ -18,9 +18,18 @@ and currently the only implementation which is **rdbms**.
 
 ### Requirements
 - jdk >= 11
+- PostgreSQL >= 13
+
+#### 1. Clone repository
 ```
 git clone https://github.com/ShaddiCS/blue-energy.git
-
+```
+#### 2. Set up database
+```sql
+createdb -U <username> -E UTF-8 blue-energy-db
+```
+#### 3. Run
+```
 cd blue-energy
 
 mvnw -Dspring.profiles.active=RDBMS spring-boot:run
@@ -29,16 +38,14 @@ mvnw -Dspring.profiles.active=RDBMS spring-boot:run
 or
 
 ```
-git clone https://github.com/ShaddiCS/blue-energy.git
-
 cd blue-energy
 
 mvnw clean package
 
-cd admin/admin/backend/target
-
-java -jar -Dspring.profiles.active=RDBMS blue-energy-bundle.jar
+java -jar -Dspring.profiles.active=RDBMS admin/admin/backend/target/blue-energy-bundle.jar
 ```
+The application will start running at http://localhost:4333.
+
 ## Technologies used
 
 ### Backend
