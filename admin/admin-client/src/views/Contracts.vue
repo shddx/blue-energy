@@ -58,37 +58,39 @@
       </el-form>
     </template>
     <template #table>
-      <el-table
-          class="shadow"
-          :data="contracts[activePage]"
-          style="width: 100%"
-          @sort-change="sortTable">
-        <el-table-column type="index" label="#"/>
-        <el-table-column label="Номер" sortable="custom" prop="number"/>
-        <el-table-column label="Тип" prop="type" sortable="custom"/>
-        <el-table-column label="Клиент" prop="client" sortable="custom"/>
-        <el-table-column label="Сумма" prop="price" sortable="custom"/>
-        <el-table-column label="Подписан" prop="signDate" sortable="custom"/>
-        <el-table-column label="Истекает" prop="endDate" sortable="custom"/>
-        <el-table-column label="Изменен" prop="updated" sortable="custom" :formatter="formatUpdated"/>
-        <el-table-column
-            align="center" width="minmax(60px, 100px)">
-          <template #default="scope">
-            <el-button
-                size="mini"
-                icon="el-icon-edit"
-                round>
-            </el-button>
-            <el-button
-                @click.prevent="deleteContract(scope.$index, scope.row)"
-                size="mini"
-                icon="el-icon-delete"
-                type="danger"
-                round>
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <el-scrollbar height="70vh">
+        <el-table
+            class="shadow"
+            :data="contracts[activePage]"
+            style="width: 100%"
+            @sort-change="sortTable">
+          <el-table-column type="index" label="#"/>
+          <el-table-column label="Номер" sortable="custom" prop="number"/>
+          <el-table-column label="Тип" prop="type" sortable="custom"/>
+          <el-table-column label="Клиент" prop="client" sortable="custom"/>
+          <el-table-column label="Сумма" prop="price" sortable="custom"/>
+          <el-table-column label="Подписан" prop="signDate" sortable="custom"/>
+          <el-table-column label="Истекает" prop="endDate" sortable="custom"/>
+          <el-table-column label="Изменен" prop="updated" sortable="custom" :formatter="formatUpdated"/>
+          <el-table-column
+              align="center" width="minmax(60px, 100px)">
+            <template #default="scope">
+              <el-button
+                  size="mini"
+                  icon="el-icon-edit"
+                  round>
+              </el-button>
+              <el-button
+                  @click.prevent="deleteContract(scope.$index, scope.row)"
+                  size="mini"
+                  icon="el-icon-delete"
+                  type="danger"
+                  round>
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-scrollbar>
       <el-pagination
           layout="prev, pager, sizes, next"
           @current-change="updateTable"
@@ -133,7 +135,7 @@ const totalPages = computed(() => store.totalPages);
 const pageSize = computed(() => store.pageSize)
 const total = computed(() => store.total)
 
-function formatUpdated(row: number, column:number, cellValue: string) {
+function formatUpdated(row: number, column: number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
 }
 
@@ -151,7 +153,7 @@ function updateTable(page: number) {
   store.updateContracts();
 }
 
-function sortTable({prop, order}: {prop: string | null, order: string | null}) {
+function sortTable({prop, order}: { prop: string | null, order: string | null }) {
   if (prop == null || order == null) {
     store.fetchContracts(activePage.value)
     return
@@ -167,6 +169,7 @@ function sortTable({prop, order}: {prop: string | null, order: string | null}) {
 ::v-deep(.el-date-editor.el-input__inner) {
   width: 100%;
 }
+
 .layout-main-content {
   background-color: #f0f2f5;
 }
