@@ -28,11 +28,15 @@ git clone https://github.com/ShaddiCS/blue-energy.git
 ```sql
 createdb -U <username> -E UTF-8 blue-energy-db
 ```
+You can set up SPRING_DATASOURCE_USERNAME and SPRING_DATASOURCE_PASSWORD environmental variables,
+that way you can skip username and password arguments in the commands below. 
+Default values are user:postgres, password: postgres
 #### 3. Run
 ```
 cd blue-energy
 
-mvnw -Dspring.profiles.active=RDBMS spring-boot:run
+mvnw clean spring-boot:run -Dspring-boot.run.arguments="--spring.datasource.username=<your.db.username> --spring.datasource.password=<your.db.password>"
+
 ```
 
 or
@@ -42,7 +46,7 @@ cd blue-energy
 
 mvnw clean package
 
-java -jar -Dspring.profiles.active=RDBMS admin/admin/backend/target/blue-energy-bundle.jar
+java -jar -Dspring.datasource.username=<your.db.username> -Dspring.datasource.password=<your.db.password>  admin/admin-backend/target/blue-energy-bundle.jar
 ```
 The application will start running at http://localhost:4333.
 

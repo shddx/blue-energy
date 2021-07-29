@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AdminBackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminBackendApplication.class);
+        SpringApplication.run(AdminBackendApplication.class, args);
     }
 }
