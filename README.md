@@ -1,5 +1,5 @@
 # Blue Energy  
-
+[![CI](https://github.com/ShaddiCS/blue-energy/actions/workflows/maven.yml/badge.svg)](https://github.com/ShaddiCS/blue-energy/actions/workflows/maven.yml)
 ### A content management system for gas service company.
 
 This project is only for demonstration purposes and holds no other value.
