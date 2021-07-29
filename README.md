@@ -9,7 +9,7 @@ that backend developers and developers in general face.
 
 ### Project has multi-module maven structure. For now there are 2 main modules: 
 - **repository module** that contains **api module** for interacting with various repository implementations 
-and currently the only implementation which is **rdbms**.
+and currently the only implementation which is **rdbms module**.
 - **admin module** has two parts: **backend module** that will have REST endpoints for accessing the service functionality,
   authentication and authorization configuration and exception handling. **client module** is our frontend.
   
