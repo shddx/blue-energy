@@ -1,7 +1,7 @@
 <template>
   <tr>
     <th scope="row">{{ rowIndex }}</th>
-    <td><span class="align-middle">{{contract.number}}</span></td>
+    <td><span class="align-middle">{{contract.contractNumber}}</span></td>
     <td>{{contract.type}}</td>
     <td>{{contract.client}}</td>
     <td>{{contract.price}}</td>
@@ -23,7 +23,7 @@
 
 <script setup="props" lang="ts">
 
-import type { Contract } from "@/store/interfaces";
+import { Contract } from "@/store/interfaces";
 import { computed, defineProps, toRefs } from 'vue'
 import { useContractStore } from "@/store/modules/contract-module";
 

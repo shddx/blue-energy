@@ -1,4 +1,4 @@
-INSERT INTO contract (id, number, type, client, price, sign_date, end_date, updated) VALUES
+INSERT INTO contract (id, contract_number, type, client, price, sign_date, end_date, updated) VALUES
 ('adwadaw1', 'ТО-ВДГО-123123', 'VDGO', 'Василий', 4234, '2020-12-01', '2021-11-30', now()),
 ('ahdfdoprkuyg234', 'ТО-ВДГО-123132', 'VDGO', 'Петр', 777, '2018-12-01', '2019-11-30', now()),
 ('ahdfdoprgjytj234', 'ТО-ВДГО-123ad132', 'VDGO', 'Антоний', 777, '2018-12-01', '2019-11-30', now()),

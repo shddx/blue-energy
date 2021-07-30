@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import type {Contract} from "@/store/interfaces";
+import {Contract} from "@/store/interfaces";
 import http from "@/api";
 import {CONTRACT, CONTRACTS, CONTRACTS_SORTED} from "@/api/routes";
 

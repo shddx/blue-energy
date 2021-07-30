@@ -5,7 +5,7 @@ create table contract
     id        varchar(255) not null,
     client    varchar(255),
     end_date  DATE,
-    number    varchar(255),
+    contract_number    varchar(255),
     price     int4,
     sign_date DATE,
     type      varchar(255),
@@ -14,4 +14,4 @@ create table contract
 );
 
 alter table if exists contract
-    add constraint unique_contract_id unique (number);
+    add constraint unique_contract_id unique (contract_number);

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class Contract {
     private String id;
-    private String number;
+    private String contractNumber;
     private ContractType type;
     private String client;
     private Integer price;

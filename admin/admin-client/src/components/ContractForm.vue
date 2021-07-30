@@ -5,7 +5,7 @@
       :before-close="hideForm">
     <el-form v-model="contract">
       <el-form-item label="Номер договора:">
-        <el-input v-model.string="contract.number" autocomplete="off"></el-input>
+        <el-input v-model.string="contract.contractNumber" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="Тип договора:">
         <el-select v-model="contract.type" placeholder="Select">
@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import {defineProps, toRefs, computed} from "vue";
-import type {Contract} from "@/store/interfaces";
+import {Contract} from "@/store/interfaces";
 import {ServiceTypes} from "@/types";
 import {useContractStore} from "@/store/modules/contract-module";
 

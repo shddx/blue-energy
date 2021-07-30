@@ -65,7 +65,7 @@
             style="width: 100%"
             @sort-change="sortTable">
           <el-table-column type="index" label="#"/>
-          <el-table-column label="Номер" sortable="custom" prop="number"/>
+          <el-table-column label="Номер" sortable="custom" prop="contractNumber"/>
           <el-table-column label="Тип" prop="type" sortable="custom"/>
           <el-table-column label="Клиент" prop="client" sortable="custom"/>
           <el-table-column label="Сумма" prop="price" sortable="custom"/>
@@ -118,7 +118,7 @@ import TablePage from "@/components/TablePage.vue";
 import {ServiceTypes} from "@/types";
 import {computed, reactive, ref} from "vue";
 import {useContractStore} from "@/store/modules/contract-module";
-import type {Contract} from "@/store/interfaces";
+import {Contract} from "@/store/interfaces";
 import ContractForm from "@/components/ContractForm.vue";
 
 interface SearchForm {
@@ -144,16 +144,7 @@ const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
 const pageSize = computed(() => store.pageSize);
 const total = computed(() => store.total);
-const contractToEdit = ref<Contract>({
-  id: '',
-  number: '',
-  type: '',
-  client: '',
-  price: 0,
-  signDate: '',
-  endDate: '',
-  updated: ''
-});
+const contractToEdit = ref<Contract>(new Contract());
 
 function test() {
   console.log('test')

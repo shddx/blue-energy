@@ -11,7 +11,7 @@ public class ContractConverterRDBMS implements Converter<Contract, ContractDB> {
         Contract contract = new Contract();
 
         contract.setId(contractDB.getId());
-        contract.setNumber(contractDB.getNumber());
+        contract.setContractNumber(contractDB.getContractNumber());
         contract.setPrice(contractDB.getPrice());
         contract.setType(contractDB.getType());
         contract.setClient(contractDB.getClient());
@@ -30,7 +30,7 @@ public class ContractConverterRDBMS implements Converter<Contract, ContractDB> {
             db.setId(entity.getId());
         }
 
-        db.setNumber(entity.getNumber());
+        db.setContractNumber(entity.getContractNumber());
         db.setPrice(entity.getPrice());
         db.setType(entity.getType());
         db.setClient(entity.getClient());

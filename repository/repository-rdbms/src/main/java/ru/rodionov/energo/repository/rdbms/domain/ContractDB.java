@@ -24,7 +24,7 @@ public class ContractDB {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
     @Column(unique = true)
-    private String number;
+    private String contractNumber;
     @Enumerated(EnumType.STRING)
     private ContractType type;
     private String client;
