@@ -74,6 +74,12 @@
           <el-table-column label="Изменен" prop="updated" sortable="custom" :formatter="formatUpdated"/>
           <el-table-column
               align="center" width="minmax(60px, 100px)">
+            <template #header>
+              <el-button
+                  type="primary"
+                  icon="el-icon-document-add">Создать
+              </el-button>
+            </template>
             <template #default="scope">
               <el-button
                   @click.prevent="showContractForm(scope.$index, scope.row)"

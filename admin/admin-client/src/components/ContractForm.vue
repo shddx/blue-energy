@@ -1,8 +1,7 @@
 <template>
   <el-dialog
-      title="Tips"
+      :title="contract.number"
       :model-value="showForm"
-      width="40%"
       :before-close="hideForm">
     <el-form v-model="contract">
       <el-form-item label="Номер договора:">
