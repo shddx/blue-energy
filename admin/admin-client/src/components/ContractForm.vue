@@ -29,7 +29,7 @@ const props = defineProps<{
   contract: Contract
 }>();
 
-const { showFrom } = toRefs(props)
+const { showForm } = toRefs(props)
 </script>
 
 <style scoped>

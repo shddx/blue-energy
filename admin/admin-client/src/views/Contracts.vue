@@ -138,7 +138,16 @@ const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
 const pageSize = computed(() => store.pageSize)
 const total = computed(() => store.total)
-const contractToEdit = ref(null);
+const contractToEdit = ref<Contract>({
+  id: '',
+  number: '',
+  type: '',
+  client: '',
+  price: 0,
+  signDate: '',
+  endDate: '',
+  updated: ''
+});
 
 function formatUpdated(row: number, column: number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');

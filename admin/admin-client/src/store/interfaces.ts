@@ -3,7 +3,7 @@ export interface Contract {
   number: string,
   type: string,
   client: string,
-  price: number
+  price: number,
   signDate: string,
   endDate: string,
   updated: string
