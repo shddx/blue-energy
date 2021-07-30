@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-      :title="contract.number"
+      :title="contract.contractNumber"
       :model-value="showForm"
       :before-close="hideForm">
     <el-form v-model="contract">
