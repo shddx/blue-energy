@@ -58,7 +58,7 @@
       </el-form>
     </template>
     <template #table>
-      <el-scrollbar height="70vh">
+      <el-scrollbar max-height="75vh">
         <el-table
             class="shadow"
             :data="contracts[activePage]"
@@ -76,6 +76,7 @@
               align="center" width="minmax(60px, 100px)">
             <template #default="scope">
               <el-button
+                  @click.prevent="showForm = true"
                   size="mini"
                   icon="el-icon-edit"
                   round>
@@ -103,14 +104,16 @@
       </el-pagination>
     </template>
   </TablePage>
+  <ContractForm :showForm="showForm"/>
 </template>
 
 <script setup lang="ts">
 import TablePage from "@/components/TablePage.vue";
 import {ServiceTypes} from "@/types";
-import {computed, reactive} from "vue";
+import {computed, reactive, ref} from "vue";
 import {useContractStore} from "@/store/modules/contract-module";
 import type {Contract} from "@/store/interfaces";
+import ContractForm from "@/components/ContractForm.vue";
 
 interface SearchForm {
   contractNumber: string
@@ -129,6 +132,7 @@ const searchForm: SearchForm = reactive({
 })
 const store = useContractStore()
 store.fetchContracts(1);
+const showForm = ref(false)
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
