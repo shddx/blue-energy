@@ -17,7 +17,7 @@
         </el-row>
         <el-row :gutter='15'>
           <el-col :xs='24' :sm='12' :xl='10'>
-            <el-form-item label="Имя клиента:">
+            <el-form-item label="Подписан:">
               <el-row justify="start">
                 <el-col :xs="24" :sm="11" :xl="11">
                   <el-form-item prop="signDateLower">
@@ -76,7 +76,7 @@
               align="center" width="minmax(60px, 100px)">
             <template #default="scope">
               <el-button
-                  @click.prevent="showForm = true"
+                  @click.prevent="showContractForm(scope.$index, scope.row)"
                   size="mini"
                   icon="el-icon-edit"
                   round>
@@ -104,7 +104,7 @@
       </el-pagination>
     </template>
   </TablePage>
-  <ContractForm :showForm="showForm"/>
+  <ContractForm :showForm="showForm" :contract="contractToEdit"/>
 </template>
 
 <script setup lang="ts">
@@ -138,6 +138,7 @@ const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
 const pageSize = computed(() => store.pageSize)
 const total = computed(() => store.total)
+const contractToEdit = ref(null);
 
 function formatUpdated(row: number, column: number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
@@ -150,6 +151,11 @@ function deleteContract(id: number, contract: Contract) {
 function updateSize(newSize: number) {
   store.pageSize = newSize;
   store.updateContracts();
+}
+
+function showContractForm(row: number, contract: Contract) {
+  showForm.value = true;
+  contractToEdit.value = contract;
 }
 
 function updateTable(page: number) {

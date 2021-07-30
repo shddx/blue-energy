@@ -21,7 +21,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-        node-version: '14.7.3'
     - name: Cache Maven packages
       uses: actions/cache@v2
       with:
