@@ -25,25 +25,29 @@ export const useContractStore = defineStore({
                     this.total = data.total
                     this.contracts[page] = data.content
                 })
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         },
         fetchContractsSorted({sort, direction}: { sort: string; direction: string }) {
             http.get(CONTRACTS_SORTED(this.activePage, this.pageSize, sort, direction))
                 .then(({data}) => {
                     this.contracts[this.activePage] = data.content
                 })
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         },
         deleteContract(contract: Contract) {
             http.delete(CONTRACT(contract.id))
                 .then(() => this.updateContracts())
                 .catch(err => console.log(err));
         },
-        saveContract(contract: Contract) {
-            console.log(contract)
+        updateContract(contract: Contract) {
             http.put(CONTRACT(contract.id), contract)
                 .then(() => this.updateContracts())
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
+        },
+        saveContract(contract: Contract) {
+            http.post('contract', contract)
+                .then(() => this.updateContracts())
+                .catch(err => console.log(err));
         }
     }
 })

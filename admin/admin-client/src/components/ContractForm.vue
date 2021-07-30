@@ -51,12 +51,18 @@ const store = useContractStore();
 const showForm = computed(() => store.showEditForm);
 
 const props = defineProps<{
-  contract: Contract
+  contract: Contract,
+  isUpdate: boolean
 }>();
 const {contract} = toRefs(props);
+const {isUpdate} = toRefs(props);
 
 function saveContract() {
-  store.saveContract(contract.value);
+  if (isUpdate.value) {
+    store.updateContract(contract.value);
+  } else {
+    store.saveContract(contract.value);
+  }
   hideForm();
 }
 

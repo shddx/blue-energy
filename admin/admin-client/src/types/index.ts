@@ -14,8 +14,8 @@ export interface RouterRecords {
     children?: Array<RouterRecords>
 }
 export enum ServiceTypes {
-    VDGO = 'ВДГО',
-    VKGO = 'ВКГО'
+    VDGO = 'VDGO',
+    VKGO = 'VKGO'
 }
 
 export interface ZObject<T> {

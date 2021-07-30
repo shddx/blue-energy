@@ -77,6 +77,7 @@
             <template #header>
               <el-button
                   type="primary"
+                  @click.prevent="showContractForm"
                   icon="el-icon-document-add">Создать
               </el-button>
             </template>
@@ -110,7 +111,7 @@
       </el-pagination>
     </template>
   </TablePage>
-  <ContractForm :contract="contractToEdit" />
+  <ContractForm :contract="contractToEdit" :isUpdate="isUpdate"/>
 </template>
 
 <script setup lang="ts">
@@ -145,6 +146,7 @@ const totalPages = computed(() => store.totalPages);
 const pageSize = computed(() => store.pageSize);
 const total = computed(() => store.total);
 const contractToEdit = ref<Contract>(new Contract());
+const isUpdate = ref(false);
 
 function test() {
   console.log('test')
@@ -163,8 +165,14 @@ function updateSize(newSize: number) {
   store.updateContracts();
 }
 
-function showContractForm(row: number, contract: Contract) {
+function showContractForm(row?: number, contract?: Contract) {
   store.showEditForm = true;
+  if (!contract) {
+    contract = new Contract();
+    isUpdate.value = false;
+  } else {
+    isUpdate.value = true;
+  }
   contractToEdit.value = contract;
 }
 
