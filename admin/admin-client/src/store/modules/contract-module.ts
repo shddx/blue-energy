@@ -38,6 +38,12 @@ export const useContractStore = defineStore({
             http.delete(CONTRACT(contract.id))
                 .then(() => this.updateContracts())
                 .catch(err => console.log(err));
+        },
+        saveContract(contract: Contract) {
+            console.log(contract)
+            http.put(CONTRACT(contract.id), contract)
+                .then(() => this.updateContracts())
+                .catch(err => console.log(err))
         }
     }
 })

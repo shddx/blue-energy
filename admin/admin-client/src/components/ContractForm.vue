@@ -36,7 +36,7 @@
     <template #footer>
     <span class="dialog-footer">
       <el-button @click="hideForm">Cancel</el-button>
-      <el-button type="primary" @click="hideForm">Confirm</el-button>
+      <el-button type="primary" @click="saveContract">Confirm</el-button>
     </span>
     </template>
   </el-dialog>
@@ -54,6 +54,12 @@ const showForm = computed(() => store.showEditForm);
 const props = defineProps<{
   contract: Contract
 }>();
+const {contract} = toRefs(props);
+
+function saveContract() {
+  store.saveContract(contract.value);
+  hideForm();
+}
 
 function hideForm() {
   store.showEditForm = false;
