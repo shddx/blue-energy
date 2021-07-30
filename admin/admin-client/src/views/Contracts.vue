@@ -104,7 +104,7 @@
       </el-pagination>
     </template>
   </TablePage>
-  <ContractForm :showForm="showForm" :contract="contractToEdit"/>
+  <ContractForm :contract="contractToEdit" />
 </template>
 
 <script setup lang="ts">
@@ -136,8 +136,8 @@ const showForm = ref(false)
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
-const pageSize = computed(() => store.pageSize)
-const total = computed(() => store.total)
+const pageSize = computed(() => store.pageSize);
+const total = computed(() => store.total);
 const contractToEdit = ref<Contract>({
   id: '',
   number: '',
@@ -148,6 +148,10 @@ const contractToEdit = ref<Contract>({
   endDate: '',
   updated: ''
 });
+
+function test() {
+  console.log('test')
+}
 
 function formatUpdated(row: number, column: number, cellValue: string) {
   return cellValue.replace('T', ' ').replace(/\..*/, '');
@@ -163,7 +167,7 @@ function updateSize(newSize: number) {
 }
 
 function showContractForm(row: number, contract: Contract) {
-  showForm.value = true;
+  store.showEditForm = true;
   contractToEdit.value = contract;
 }
 

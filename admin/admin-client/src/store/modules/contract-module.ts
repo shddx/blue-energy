@@ -10,6 +10,7 @@ export const useContractStore = defineStore({
         activePage: 0,
         pageSize: 10,
         total: 0,
+        showEditForm: false,
         contracts: Array<Array<Contract>>()
     }),
     actions: {
