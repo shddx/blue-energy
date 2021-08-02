@@ -22,12 +22,6 @@
         </dependency>
         <dependency>
             <groupId>ru.rodionov.energo</groupId>
-            <artifactId>repository-api</artifactId>
-            <version>${project.parent.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ru.rodionov.energo</groupId>
             <artifactId>repository-rdbms</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>
@@ -59,7 +53,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <profiles>
+        <profile>
+            <id>rdbms</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.rodionov.energo</groupId>
+                    <artifactId>repository-api</artifactId>
+                    <version>${project.parent.version}</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+            <properties>
+                <activeSpringProfiles>prod</activeSpringProfiles>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
     <build>
         <finalName>blue-energy-bundle</finalName>
         <plugins>

@@ -1,11 +1,11 @@
 package ru.rodionov.energo.admin.config;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
-@Profile("RDBMS")
 @Configuration
-@Import(ru.rodionov.energo.repository.rdbms.config.DBConfig.class)
-public class RDBMSConfig {
+@ComponentScan("ru.rodionov.energo.repository")
+public class DatabaseConfig {
 }
