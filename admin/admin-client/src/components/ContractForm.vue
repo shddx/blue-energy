@@ -45,7 +45,7 @@
 import {defineProps, toRefs, computed} from "vue";
 import {Contract} from "@/store/interfaces";
 import {ServiceTypes} from "@/types";
-import {useContractStore} from "@/store/modules/contract-module";
+import {useContractStore} from "@/store/modules/contracts";
 
 const store = useContractStore();
 const showForm = computed(() => store.showEditForm);

@@ -118,7 +118,7 @@
 import TablePage from "@/components/TablePage.vue";
 import {ServiceTypes} from "@/types";
 import {computed, reactive, ref} from "vue";
-import {useContractStore} from "@/store/modules/contract-module";
+import {useContractStore} from "@/store/modules/contracts";
 import {Contract} from "@/store/interfaces";
 import ContractForm from "@/components/ContractForm.vue";
 
@@ -166,7 +166,6 @@ function updateSize(newSize: number) {
 }
 
 function showContractForm(row?: number, contract?: Contract) {
-  store.showEditForm = true;
   if (!contract) {
     contract = new Contract();
     isUpdate.value = false;
@@ -174,6 +173,7 @@ function showContractForm(row?: number, contract?: Contract) {
     isUpdate.value = true;
   }
   contractToEdit.value = contract;
+  store.showEditForm = true;
 }
 
 function updateTable(page: number) {
