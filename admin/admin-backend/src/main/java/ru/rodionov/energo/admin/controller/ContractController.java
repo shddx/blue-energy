@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
-import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.admin.model.PageResponse;
+import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.api.service.ContractService;
 
 import static ru.rodionov.energo.admin.controller.ContractController.URL_PATH;
