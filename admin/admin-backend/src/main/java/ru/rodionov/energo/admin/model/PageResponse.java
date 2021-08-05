@@ -18,7 +18,7 @@ public class PageResponse<T> {
         int pageNumber = page.getPageable().getPageNumber() + 1;
         String pageUrl = urlPath + "?page=";
         String previous = page.getPageable().hasPrevious() ? pageUrl + (pageNumber - 1) : null;
-        String next = pageNumber == totalPages - 1 ? null : pageUrl + (pageNumber + 1);
+        String next = pageNumber == totalPages ? null : pageUrl + (pageNumber + 1);
 
         return new PageResponse<>(page.getContent(), totalPages, page.getTotalElements(), next, previous);
     }
