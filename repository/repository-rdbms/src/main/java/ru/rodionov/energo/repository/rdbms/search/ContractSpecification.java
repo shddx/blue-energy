@@ -1,5 +1,7 @@
 package ru.rodionov.energo.repository.rdbms.search;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.Specification;
 import ru.rodionov.energo.repository.rdbms.domain.ContractDB;
 
@@ -11,7 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContractFilter implements Specification<ContractDB> {
+@Getter
+@Setter
+public class ContractSpecification implements Specification<ContractDB> {
     private String contractNumber;
     private LocalDate fromSignDate;
     private LocalDate toSignDate;
