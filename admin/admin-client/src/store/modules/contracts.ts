@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
-import {Contract} from "@/store/interfaces";
+import {Contract, ContractSearchParams} from "@/store/interfaces";
 import http from "@/api";
-import {CONTRACT, CONTRACTS, CONTRACTS_SORTED} from "@/api/routes";
+import {CONTRACT, CONTRACT_FILTER, CONTRACTS, CONTRACTS_SORTED} from "@/api/routes";
 
 export const useContractStore = defineStore({
     id: 'contract-store',
@@ -47,6 +47,15 @@ export const useContractStore = defineStore({
         saveContract(contract: Contract) {
             http.post('contract', contract)
                 .then(() => this.updateContracts())
+                .catch(err => console.log(err));
+        },
+        filterContracts(searchParams: ContractSearchParams) {
+            http.get(CONTRACT_FILTER(searchParams))
+                .then(({data}) => {
+                    this.totalPages = data.pages;
+                    this.total = data.total;
+                    this.contracts[this.activePage] = data.content
+                })
                 .catch(err => console.log(err));
         }
     }

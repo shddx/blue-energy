@@ -21,15 +21,15 @@
               <el-row justify="start">
                 <el-col :xs="24" :sm="11" :xl="11">
                   <el-form-item prop="signDateLower">
-                    <el-date-picker v-model='searchForm.signDateLower' type='date'
-                                    placeholder='От даты' class="w-full"/>
+                    <el-date-picker v-model='searchForm.fromSignDate' class="w-full"
+                                    format="YYYY-MM-DD" placeholder='От даты' type='date' value-format="YYYY-MM-DD"/>
                   </el-form-item>
                 </el-col>
                 <el-col class="hidden-xs-only text-center" :sm="2" :xl="2">-</el-col>
                 <el-col :xs="24" :sm="8" :xl="11">
                   <el-form-item prop="signDateUpper">
-                    <el-date-picker v-model='searchForm.signDateUpper' type='date'
-                                    placeholder='До даты' class="w-full"/>
+                    <el-date-picker v-model='searchForm.toSignDate' class="w-full"
+                                    format="YYYY-MM-DD" placeholder='До даты' type='date' value-format="YYYY-MM-DD"/>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -51,7 +51,7 @@
         <el-row>
           <el-col :xs='24' :sm='20' :xl='20'>
             <el-row justify="start">
-              <el-button type="primary" icon="el-icon-search">Искать</el-button>
+              <el-button icon="el-icon-search" type="primary" @click="searchContracts">Искать</el-button>
             </el-row>
           </el-col>
         </el-row>
@@ -115,12 +115,10 @@
 </template>
 
 <script setup lang="ts">
-import TablePage from "@/components/TablePage.vue";
 import {ServiceTypes} from "@/types";
 import {computed, reactive, ref} from "vue";
 import {useContractStore} from "@/store/modules/contracts";
-import {Contract} from "@/store/interfaces";
-import ContractForm from "@/components/ContractForm.vue";
+import {Contract, ContractSearchParams} from "@/store/interfaces";
 
 interface SearchForm {
   contractNumber: string
@@ -130,13 +128,7 @@ interface SearchForm {
   type: ServiceTypes
 }
 
-const searchForm: SearchForm = reactive({
-  contractNumber: '',
-  client: '',
-  signDateLower: '',
-  signDateUpper: '',
-  type: ServiceTypes.VDGO
-})
+const searchForm: ContractSearchParams = reactive(new ContractSearchParams())
 const store = useContractStore()
 store.fetchContracts(1);
 const showForm = ref(false)
@@ -163,6 +155,11 @@ function deleteContract(id: number, contract: Contract) {
 function updateSize(newSize: number) {
   store.pageSize = newSize;
   store.updateContracts();
+}
+
+function searchContracts() {
+  console.log(searchForm.fromSignDate)
+  store.filterContracts(searchForm);
 }
 
 function showContractForm(row?: number, contract?: Contract) {

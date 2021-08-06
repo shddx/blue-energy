@@ -5,7 +5,7 @@ import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.rdbms.domain.ContractDB;
 
 @Component
-public class ContractConverterRDBMS implements Converter<Contract, ContractDB> {
+public class ContractConverter implements Converter<Contract, ContractDB> {
     @Override
     public Contract fromDB(ContractDB contractDB) {
         Contract contract = new Contract();

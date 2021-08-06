@@ -6,8 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
-import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.admin.model.PageResponse;
+import ru.rodionov.energo.repository.api.model.Contract;
+import ru.rodionov.energo.repository.api.model.ContractSearchParams;
 import ru.rodionov.energo.repository.api.service.ContractService;
 
 import static ru.rodionov.energo.admin.controller.ContractController.URL_PATH;
@@ -18,6 +19,14 @@ import static ru.rodionov.energo.admin.controller.ContractController.URL_PATH;
 public class ContractController {
     final static String URL_PATH = "/api/admin/contract";
     private final ContractService contractService;
+
+    @GetMapping("/filter")
+    public PageResponse<Contract> filter(ContractSearchParams searchParams,
+                                         @SortDefault(sort = "signDate",
+                                                 direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Contract> page = contractService.filter(searchParams, pageable);
+        return PageResponse.build(page, URL_PATH);
+    }
 
     @GetMapping
     public PageResponse<Contract> getAll(@SortDefault(sort = "signDate",
