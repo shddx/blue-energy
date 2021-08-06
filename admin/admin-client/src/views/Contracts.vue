@@ -1,16 +1,16 @@
 ﻿<template>
   <TablePage>
     <template #form>
-      <el-form :model='searchForm' size='mini'>
+      <el-form ref="formRef" :model='searchForm' size='mini'>
         <el-row :gutter='15' class="py-2" justify="start">
           <el-col :xs='24' :sm='12' :xl='10'>
-            <el-form-item label="Номер договора:">
+            <el-form-item label="Номер договора:" prop="contractNumber">
               <el-input v-model='searchForm.contractNumber' placeholder='Номер договора'
                         prefix-icon="el-icon-search"/>
             </el-form-item>
           </el-col>
           <el-col :xs='24' :sm='12' :xl='10'>
-            <el-form-item label="Имя клиента:">
+            <el-form-item label="Имя клиента:" prop="client">
               <el-input :model='searchForm.client' placeholder='Имя клиента' prefix-icon="el-icon-search"/>
             </el-form-item>
           </el-col>
@@ -20,14 +20,14 @@
             <el-form-item label="Подписан:">
               <el-row justify="start">
                 <el-col :xs="24" :sm="11" :xl="11">
-                  <el-form-item prop="signDateLower">
-                    <el-date-picker v-model='searchForm.fromSignDate' class="w-full"
+                  <el-form-item prop="fromSignDate">
+                    <el-date-picker ref="fromDateRef" v-model='searchForm.fromSignDate' class="w-full"
                                     format="YYYY-MM-DD" placeholder='От даты' type='date' value-format="YYYY-MM-DD"/>
                   </el-form-item>
                 </el-col>
                 <el-col class="hidden-xs-only text-center" :sm="2" :xl="2">-</el-col>
                 <el-col :xs="24" :sm="8" :xl="11">
-                  <el-form-item prop="signDateUpper">
+                  <el-form-item prop="toSignDate">
                     <el-date-picker v-model='searchForm.toSignDate' class="w-full"
                                     format="YYYY-MM-DD" placeholder='До даты' type='date' value-format="YYYY-MM-DD"/>
                   </el-form-item>
@@ -36,7 +36,7 @@
             </el-form-item>
           </el-col>
           <el-col :xs='24' :sm='12' :xl='10'>
-            <el-form-item label="Тип договора:">
+            <el-form-item label="Тип договора:" prop="type">
               <el-select v-model="searchForm.type" placeholder="Select">
                 <el-option
                     v-for="item in ServiceTypes"
@@ -52,6 +52,7 @@
           <el-col :xs='24' :sm='20' :xl='20'>
             <el-row justify="start">
               <el-button icon="el-icon-search" type="primary" @click="searchContracts">Искать</el-button>
+              <el-button icon="el-icon-refresh" @click="clearSearchForm">Сброcить фильтр</el-button>
             </el-row>
           </el-col>
         </el-row>
@@ -116,9 +117,11 @@
 
 <script setup lang="ts">
 import {ServiceTypes} from "@/types";
-import {computed, reactive, ref} from "vue";
+import {computed, reactive, ref, unref} from "vue";
 import {useContractStore} from "@/store/modules/contracts";
 import {Contract, ContractSearchParams} from "@/store/interfaces";
+import ContractForm from '@/components/ContractForm.vue'
+import TablePage from '@/components/TablePage.vue'
 
 interface SearchForm {
   contractNumber: string
@@ -129,9 +132,11 @@ interface SearchForm {
 }
 
 const searchForm: ContractSearchParams = reactive(new ContractSearchParams())
+
 const store = useContractStore()
-store.fetchContracts(1);
+store.updateContracts();
 const showForm = ref(false)
+const formRef = ref(null)
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
@@ -139,9 +144,10 @@ const pageSize = computed(() => store.pageSize);
 const total = computed(() => store.total);
 const contractToEdit = ref<Contract>(new Contract());
 const isUpdate = ref(false);
+const fromDateRef = ref(null)
 
-function test() {
-  console.log('test')
+function test(num: number) {
+  console.log('test' + num)
 }
 
 function formatUpdated(row: number, column: number, cellValue: string) {
@@ -158,8 +164,15 @@ function updateSize(newSize: number) {
 }
 
 function searchContracts() {
-  console.log(searchForm.fromSignDate)
-  store.filterContracts(searchForm);
+  store.searchParams = searchForm;
+  store.filterActive = true;
+  store.updateContracts();
+}
+
+function clearSearchForm() {
+  store.filterActive = false;
+  unref(formRef).resetFields();
+  store.updateContracts();
 }
 
 function showContractForm(row?: number, contract?: Contract) {
@@ -180,11 +193,13 @@ function updateTable(page: number) {
 
 function sortTable({prop, order}: { prop: string | null, order: string | null }) {
   if (prop == null || order == null) {
-    store.fetchContracts(activePage.value)
+    store.updateContracts()
     return
   }
   let direction = order === 'ascending' ? 'asc' : 'desc';
-  store.fetchContractsSorted({sort: prop, direction});
+  store.sort = prop;
+  store.direction = direction;
+  store.updateContracts();
 }
 </script>
 

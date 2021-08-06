@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {Contract, ContractSearchParams} from "@/store/interfaces";
+import {Contract, ContractSearchParams, PageParams} from "@/store/interfaces";
 import http from "@/api";
 import {CONTRACT, CONTRACT_FILTER, CONTRACTS, CONTRACTS_SORTED} from "@/api/routes";
 
@@ -7,29 +7,39 @@ export const useContractStore = defineStore({
     id: 'contract-store',
     state: () => ({
         totalPages: 0,
-        activePage: 0,
+        activePage: 1,
         pageSize: 10,
+        sort: 'contractNumber',
+        direction: 'ASC',
         total: 0,
         showEditForm: false,
-        contracts: Array<Array<Contract>>()
+        contracts: Array<Array<Contract>>(),
+        filterActive: false,
+        searchParams: {} as ContractSearchParams
     }),
     actions: {
         updateContracts() {
-            this.fetchContracts(this.activePage);
+            let pageParams = new PageParams(this.activePage, this.pageSize, this.sort, this.direction);
+            if (this.filterActive) {
+                this.filterContracts(this.searchParams, pageParams)
+            } else {
+                this.fetchContracts(pageParams);
+            }
         },
-        fetchContracts(page: number) {
-            http.get(CONTRACTS(page, this.pageSize))
+        fetchContracts(pageParams: PageParams) {
+            http.get(CONTRACTS_SORTED(pageParams))
                 .then(({data}) => {
-                    this.activePage = page
                     this.totalPages = data.pages
                     this.total = data.total
-                    this.contracts[page] = data.content
+                    this.contracts[pageParams.page] = data.content
                 })
                 .catch(err => console.log(err));
         },
-        fetchContractsSorted({sort, direction}: { sort: string; direction: string }) {
-            http.get(CONTRACTS_SORTED(this.activePage, this.pageSize, sort, direction))
+        filterContracts(searchParams: ContractSearchParams, pageParams: PageParams) {
+            http.get(CONTRACT_FILTER(searchParams, pageParams))
                 .then(({data}) => {
+                    this.totalPages = data.pages;
+                    this.total = data.total;
                     this.contracts[this.activePage] = data.content
                 })
                 .catch(err => console.log(err));
@@ -47,15 +57,6 @@ export const useContractStore = defineStore({
         saveContract(contract: Contract) {
             http.post('contract', contract)
                 .then(() => this.updateContracts())
-                .catch(err => console.log(err));
-        },
-        filterContracts(searchParams: ContractSearchParams) {
-            http.get(CONTRACT_FILTER(searchParams))
-                .then(({data}) => {
-                    this.totalPages = data.pages;
-                    this.total = data.total;
-                    this.contracts[this.activePage] = data.content
-                })
                 .catch(err => console.log(err));
         }
     }

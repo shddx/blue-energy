@@ -20,6 +20,29 @@ export class Contract {
     }
 }
 
+export class PageParams {
+    page: number
+    size: number
+    sort: string
+    direction: string
+
+    constructor(page: number, size: number, sort: string, direction: string) {
+        this.page = page;
+        this.size = size;
+        this.sort = sort;
+        this.direction = direction;
+    }
+
+    buildQuery(): string {
+        let params = [
+            ...(this.page ? ['page=' + this.page] : []),
+            ...(this.size ? ['size=' + this.size] : []),
+            ...(this.sort ? [`sort=${this.sort},${this.direction}`] : []),
+        ]
+        return params.join("&");
+    }
+}
+
 export class ContractSearchParams {
     contractNumber: string | undefined;
     client: string | undefined;
@@ -39,7 +62,7 @@ export class ContractSearchParams {
         this.type = type;
     }
 
-    buildSearchQuery = () => {
+    buildSearchQuery(): string {
         let params = [
             ...(this.contractNumber ? ['contractNumber=' + this.contractNumber] : []),
             ...(this.client ? ['client=' + this.client] : []),
