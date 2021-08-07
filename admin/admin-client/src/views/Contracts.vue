@@ -136,7 +136,7 @@ const searchForm: ContractSearchParams = reactive(new ContractSearchParams())
 const store = useContractStore()
 store.updateContracts();
 const showForm = ref(false)
-const formRef = ref(null)
+const formRef = ref<HTMLFormElement | null>(null)
 const contracts = computed(() => store.contracts);
 const activePage = computed(() => store.activePage);
 const totalPages = computed(() => store.totalPages);
@@ -171,7 +171,7 @@ function searchContracts() {
 
 function clearSearchForm() {
   store.filterActive = false;
-  unref(formRef).resetFields();
+  unref(formRef)?.resetFields();
   store.updateContracts();
 }
 
