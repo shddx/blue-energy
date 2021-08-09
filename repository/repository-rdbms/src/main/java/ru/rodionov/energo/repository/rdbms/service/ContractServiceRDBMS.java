@@ -36,13 +36,6 @@ public class ContractServiceRDBMS implements ContractService {
         return responseBuilder.buildPageResponse(page);
     }
 
-    private Page<Contract> buildPageResponse(Page<ContractDB> page) {
-        List<Contract> contracts = page.stream()
-                .map(converter::fromDB)
-                .collect(toList());
-        return new PageImpl<>(contracts, page.getPageable(), page.getTotalElements());
-    }
-
     @Override
     public Page<Contract> findPaginated(Pageable pageable) {
         Page<ContractDB> page = contractRepo.findAll(pageable);
