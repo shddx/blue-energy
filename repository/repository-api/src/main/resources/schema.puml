@@ -1,0 +1,44 @@
+@startuml
+class Contract {
+    id : String
+    contractNumber: String
+    price: Integer
+    signDate: LocalDate
+    endDate: LocalDate
+    updated: LocalDateTime
+}
+Contract *- Property
+abstract Credentials {
+
+}
+class PersonCredentials {
+
+}
+class OrganizationCredentials {
+}
+Credentials <|-- PersonCredentials
+Credentials <|-- OrganizationCredentials
+class Client {
+    name: String
+    type: String
+    email: String
+    phone: String
+    updated: LocalDateTime
+}
+class Property {
+    address: String
+    propertyType: String
+}
+Client *- Property
+Client <-- Credentials
+class Service {
+    name: String
+    price: Integer
+    type: String
+    category: String
+    updated: LocalDateTime
+}
+Contract *- Client: 0..*
+Contract *- Service: 0..*
+
+@enduml
