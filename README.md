@@ -19,6 +19,7 @@ and currently the only implementation which is **rdbms module**.
 #### Requirements
 - jdk >= 11
 - PostgreSQL >= 13
+- Docker >= 17.09 for testing
 
 #### 1. Clone repository
 ```
