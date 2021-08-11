@@ -1,4 +1,4 @@
-package ru.rodionov.energo.repository.rdbms.util;
+package ru.rodionov.energo.repository.rdbms;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,12 +21,9 @@ public class ContractTestData {
     public static final Contract CONTRACT_1 = new Contract(CONTRACT_1_ID, "ТО-ВДГО-123123", ContractType.VDGO, "Василий", 4234, UPPER_SIGN_DATE, LocalDate.of(2021, 11, 30), null);
     public static final Contract CONTRACT_2 = new Contract("test_id_2", "ТО-ВДГО-123132", ContractType.VDGO, "Петр", 777, LOWER_SIGN_DATE, LocalDate.of(2021, 1, 1), null);
     public static final Contract CONTRACT_3 = new Contract("test_id_3", "ТО-ВДГО-123ad132", ContractType.VDGO, "Антоний", 777, INSIDE_SIGN_DATE, LocalDate.of(2021, 1, 1), null);
-    public static final List<Contract> CONTRACTS_IN_DATE_RANGE = List.of(CONTRACT_1, CONTRACT_2, CONTRACT_3);
     public static final Contract CONTRACT_4 = new Contract("test_id_4", "ТО-ВДГО-123sf132", ContractType.VDGO, "Рик", LOWER_PRICE, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
     public static final Contract CONTRACT_5 = new Contract("test_id_5", "ТО-ВДГО-1231drt32", ContractType.VDGO, "Морти", INSIDE_PRICE, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
     public static final Contract CONTRACT_6 = new Contract("test_id_6", "ТО-ВДГО-12drtafefef3132", ContractType.VDGO, "Силас", UPPER_PRICE, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
-    public static final List<Contract> CONTRACTS = buildContractListOf10();
-    public static final List<Contract> CONTRACTS_IN_PRICE_RANGE = List.of(CONTRACT_4, CONTRACT_5, CONTRACT_6);
     public static final Contract CONTRACT_7 = new Contract("test_id_7", "ТО-ВДГО-12drt3132", ContractType.VDGO, "Мэддисон", 777, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
     public static final Contract CONTRACT_8 = new Contract("test_id_8", "ТО-ВДГО-123drt132", ContractType.VDGO, "Аники", 777, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
     public static final Contract CONTRACT_9 = new Contract("test_id_9", "ТО-ВДГО-1231rtgd32", ContractType.VDGO, "Билли", 777, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
@@ -44,6 +41,10 @@ public class ContractTestData {
     public static final Contract CONTRACT_21 = new Contract("test_id_21", "ТО-ВДГО-123adw132", ContractType.VDGO, "Петр", 777, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
     public static final Contract CONTRACT_22 = new Contract("test_id_22", "ТО-ВДГО-123asef132", ContractType.VDGO, "Петр", 777, LocalDate.of(2018, 12, 1), LocalDate.of(2019, 11, 30), null);
     public static final Contract CONTRACT_23 = new Contract("test_id_23", "ТО-ВДГО-124444sef43", ContractType.VDGO, "Алекс", 9999, LocalDate.of(2019, 12, 1), LocalDate.of(2020, 11, 30), null);
+
+    public static final List<Contract> CONTRACTS = buildContractListOf10();
+    public static final List<Contract> CONTRACTS_IN_PRICE_RANGE = List.of(CONTRACT_4, CONTRACT_5, CONTRACT_6);
+    public static final List<Contract> CONTRACTS_IN_DATE_RANGE = List.of(CONTRACT_1, CONTRACT_2, CONTRACT_3);
 
     public static Contract getNewContract() {
         Contract db = new Contract();

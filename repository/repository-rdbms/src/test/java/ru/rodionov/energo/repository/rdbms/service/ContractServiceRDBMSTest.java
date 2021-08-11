@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.api.model.ContractSearchParams;
 import ru.rodionov.energo.repository.rdbms.DbBaseTest;
-import ru.rodionov.energo.repository.rdbms.util.ContractTestData;
+import ru.rodionov.energo.repository.rdbms.ContractTestData;
 
 import java.util.Collections;
 
