@@ -3,7 +3,6 @@ package ru.rodionov.energo.repository.rdbms.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +15,6 @@ import ru.rodionov.energo.repository.rdbms.converter.ResponseBuilder;
 import ru.rodionov.energo.repository.rdbms.domain.ContractDB;
 import ru.rodionov.energo.repository.rdbms.repo.ContractRepo;
 import ru.rodionov.energo.repository.rdbms.search.ContractSpecification;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor

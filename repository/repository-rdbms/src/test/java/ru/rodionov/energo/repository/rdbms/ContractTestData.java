@@ -1,10 +1,7 @@
 package ru.rodionov.energo.repository.rdbms;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import ru.rodionov.energo.repository.api.model.Contract;
 import ru.rodionov.energo.repository.api.model.ContractType;
-import ru.rodionov.energo.repository.api.model.Contract;
 
 import java.time.LocalDate;
 import java.util.List;
