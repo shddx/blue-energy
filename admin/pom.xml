@@ -16,7 +16,6 @@
     <name>Admin</name>
 
     <modules>
-        <module>admin-client</module>
         <module>admin-backend</module>
     </modules>
 
